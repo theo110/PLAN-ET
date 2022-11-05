@@ -94,7 +94,16 @@ function Home(props) {
     const [fixedEvents, setFixedEvents] = useState([]);
     const [otherEvents, setOtherEvents] = useState([]);
 
-    useEffect(() => {
+    function sortByPriority(otherEvents){
+        const result = [...otherEvents].sort(function(a, b) {
+          if (a.priority < b.priority) return -1;
+          if (a.priority > b.priority) return 1;
+          return 0
+        })
+        return result
+    }
+
+    useEffect(() => {        
         if (otherEvents.length !== 0) {
             console.log(JSON.stringify(otherEvents));
         }
@@ -129,7 +138,8 @@ function Home(props) {
             array.push(curr);
             i++;
         }
-        setOtherEvents(array)
+        var sorted = sortByPriority(array)
+        setOtherEvents([sorted])
     }
 
     // test calendar

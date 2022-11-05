@@ -1,5 +1,21 @@
 import React, { useEffect, useState } from "react";
 import icsToJson from "ics-to-json";
+/*import { useDropzone } from "React-dropzone";
+
+function Dropzone({ open }) {
+  const { getRootProps, getInputProps } = useDropzone({});
+  return (
+    <div {...getRootProps({ className: "dropzone" })}>
+      <input className="input-zone" {...getInputProps()} />
+      <div className="text-center">
+        <p className="dropzone-content">
+          Drop .ics Files Here
+        </p>
+      </div>
+    </div>
+  );
+}
+*/
 
 function Upload(props) {
   const { setFixedEvents } = props;
