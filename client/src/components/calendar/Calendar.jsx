@@ -1,18 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from "@fullcalendar/timegrid";
 
-import { useState, useEffect } from 'react'
-
 const Calendar = () => {
-  const handleFile = async (e) => {
-    const file = e.target.files[0];
-    console.log(file);
-  }
-
   return (
     <div>
-      <input onChange={handleFile} type='file' />
       <FullCalendar
         plugins={[timeGridPlugin]}
         initialView='timeGridWeek'
