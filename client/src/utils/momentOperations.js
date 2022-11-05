@@ -8,10 +8,6 @@ export const splitEventsByDay = (events) => {
   return result;
 };
 
-export const incrementBy = (date, hours) => {
-  return date.clone().add(hours, "hours");
-};
-
 export const transposeToThisWeek = (date) => {
   const offset = date - date?.clone()?.startOf("week");
   const newDate = moment(moment() + offset);
