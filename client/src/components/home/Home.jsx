@@ -1,6 +1,8 @@
-import { useState, useEffect } from 'react'
-import { Typography, Button, TextField, InputAdornment } from '@mui/material';
-import { useFormik } from 'formik';
+import { useState, useEffect } from "react";
+import { Typography, Button, TextField, InputAdornment } from "@mui/material";
+import { useFormik } from "formik";
+import { useNavigate } from "react-router";
+import Upload from "../upload/Upload";
 
 const Form = (props) => {
     const [customField, setCustomField] = useState([]);
@@ -85,6 +87,7 @@ const Form = (props) => {
     )
 }
 function Home(props) {
+    const { eventEntries, setEventEntries } = props;
     const [fixedEvents, setFixedEvents] = useState([]);
     const [otherEvents, setOtherEvents] = useState([]);
 
@@ -104,42 +107,45 @@ function Home(props) {
         while (i < keys.length) {
             var priority;
             var key = keys[i]
-            switch(key){
+            switch (key) {
                 case 'sleep':
-                    priority=0;
+                    priority = 0;
                     break;
                 case 'meal':
-                    priority=1;
+                    priority = 1;
                     break;
                 case 'study':
-                    priority=2;
+                    priority = 2;
                     break;
                 default:
-                    priority=currPriority;
+                    priority = currPriority;
                     currPriority += 1;
             }
-            var curr = { name: key, time: values[key], priority: priority}
+            var curr = { name: key, time: values[key], priority: priority }
             array.push(curr);
             i++;
         }
         setOtherEvents(array)
     }
 
+    // test calendar
+    const navigate = useNavigate();
 
-    //Uploader
-    if (fixedEvents.length === 0) {
-        return (
-            <div>
-                <Form submitHandler={onSubmit}></Form>
-            </div>
-        )
-    } else {
-        return (
-            <div>
-
-            </div>
-        )
-    }
+    return (
+        <>
+            <Upload setEventEntries={setEventEntries} />
+            {fixedEvents.length === 0 ? (
+                <div>
+                    <Form submitHandler={onSubmit}></Form>
+                    <button type='button' onClick={() => navigate("/calendar")}>
+                        Test calendar
+                    </button>
+                </div>
+            ) : (
+                <div></div>
+            )}
+        </>
+    );
 }
 
-export default Home
+export default Home;
