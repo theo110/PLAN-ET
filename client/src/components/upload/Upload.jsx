@@ -21,7 +21,7 @@ function Dropzone({ open }) {
 
 function Upload(props) {
   const { setFixedEvents } = props;
-  const [parsedCalendarEvents, setParsedCalendarEvents] = useState({});
+  const [parsedCalendarEvents, setParsedCalendarEvents] = useState([]);
 
   const jsonToCalendar = (icsJson) => {
     return icsJson.map(({ summary, startDate, endDate }) => {

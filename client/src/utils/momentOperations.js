@@ -3,7 +3,7 @@ import moment from "moment";
 export const splitEventsByDay = (events) => {
   let result = [[], [], [], [], [], [], []];
   events.forEach((e) => {
-    result[e.day()].push(e);
+    result[e.start.day()].push(e);
   });
   return result;
 };
