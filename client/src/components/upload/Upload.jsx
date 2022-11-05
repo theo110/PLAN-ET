@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
+import moment from "moment";
 import icsToJson from "ics-to-json";
+import sortEvents from "../../utils/eventSorter";
 /*import { useDropzone } from "React-dropzone";
 
 function Dropzone({ open }) {
@@ -19,14 +21,14 @@ function Dropzone({ open }) {
 
 function Upload(props) {
   const { setFixedEvents } = props;
-  const [jsonResult, setJsonResult] = useState({});
+  const [parsedCalendarEvents, setParsedCalendarEvents] = useState({});
 
-  const icsJsonToCalendar = (icsJson) => {
+  const jsonToCalendar = (icsJson) => {
     return icsJson.map(({ summary, startDate, endDate }) => {
       const entry = {
         title: summary,
-        start: startDate,
-        end: endDate,
+        start: moment(startDate),
+        end: moment(endDate),
       };
       return entry;
     });
@@ -36,16 +38,17 @@ function Upload(props) {
     const reader = new FileReader();
     reader.onload = (readerEvent) => {
       const result = icsToJson(readerEvent.target.result);
-      setJsonResult(icsJsonToCalendar(result));
+      setParsedCalendarEvents(sortEvents(jsonToCalendar(result)));
     };
     reader.readAsText(e.target.files[0]);
   };
 
   useEffect(() => {
-    if (jsonResult) {
-      setFixedEvents(jsonResult);
+    if (parsedCalendarEvents) {
+      setFixedEvents(parsedCalendarEvents);
     }
-  }, [jsonResult, setFixedEvents]);
+    console.log(parsedCalendarEvents);
+  }, [parsedCalendarEvents, setFixedEvents]);
 
   return (
     <div>
