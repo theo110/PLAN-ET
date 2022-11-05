@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Typography, Button, TextField, InputAdornment } from "@mui/material";
 import { useFormik } from "formik";
+import { useNavigate } from "react-router";
 import Upload from "../upload/Upload";
 
 const Form = (props) => {
@@ -28,6 +29,7 @@ const Form = (props) => {
   );
 };
 function Home(props) {
+  const { eventEntries, setEventEntries } = props;
   const [fixedEvents, setFixedEvents] = useState([]);
   const [otherEvents, setOtherEvents] = useState([]);
 
@@ -51,12 +53,18 @@ function Home(props) {
     setOtherEvents(array);
   };
 
+  // test calendar
+  const navigate = useNavigate();
+
   return (
     <>
-      <Upload />
+      <Upload setEventEntries={setEventEntries} />
       {fixedEvents.length === 0 ? (
         <div>
           <Form submitHandler={onSubmit}></Form>
+          <button type='button' onClick={() => navigate("/calendar")}>
+            Test calendar
+          </button>
         </div>
       ) : (
         <div></div>

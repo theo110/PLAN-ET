@@ -1,22 +1,39 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import icsToJson from "ics-to-json";
 
-function Upload() {
+function Upload(props) {
+  const { setEventEntries } = props;
   const [jsonResult, setJsonResult] = useState({});
 
-  const handleFile = async (e) => {
+  const icsJsonToCalendar = (icsJson) => {
+    return icsJson.map(({ summary, startDate, endDate }) => {
+      const entry = {
+        title: summary,
+        start: startDate,
+        end: endDate,
+      };
+      return entry;
+    });
+  };
+
+  const handleFileUpload = async (e) => {
     const reader = new FileReader();
     reader.onload = (readerEvent) => {
       const result = icsToJson(readerEvent.target.result);
-      setJsonResult(result);
-      console.log(result);
+      setJsonResult(icsJsonToCalendar(result));
     };
     reader.readAsText(e.target.files[0]);
   };
 
+  useEffect(() => {
+    if (jsonResult) {
+      setEventEntries(jsonResult);
+    }
+  }, [jsonResult, setEventEntries]);
+
   return (
     <div>
-      <input onChange={handleFile} type='file' />
+      <input onChange={handleFileUpload} type='file' />
     </div>
   );
 }
