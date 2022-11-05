@@ -3,6 +3,8 @@ import { Typography, Button, TextField, InputAdornment } from "@mui/material";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router";
 import Upload from "../upload/Upload";
+import "./Home.css";
+
 
 const Form = (props) => {
     const [customField, setCustomField] = useState([]);
@@ -86,6 +88,7 @@ const Form = (props) => {
         </div>
     )
 }
+
 function Home(props) {
     const { eventEntries, setEventEntries } = props;
     const [fixedEvents, setFixedEvents] = useState([]);
@@ -93,9 +96,10 @@ function Home(props) {
 
     useEffect(() => {
         if (otherEvents.length !== 0) {
-            console.log(JSON.stringify(otherEvents, null, 2));
+            console.log(JSON.stringify(otherEvents));
         }
     }, [otherEvents])
+
 
     //Aggregate form data
     const onSubmit = (values) => {
@@ -132,14 +136,12 @@ function Home(props) {
     const navigate = useNavigate();
 
   return (
-    <>
-      <Upload setFixedEvents={setFixedEvents} />
-      <Form submitHandler={onSubmit}></Form>
+    <div className="container">
       <button type='button' onClick={() => navigate("/calendar")}>
         Test calendar
       </button>
-      {fixedEvents.length === 0 ? <div></div> : <div></div>}
-    </>
+      {(Object.keys(fixedEvents).length === 0) ? <Upload setFixedEvents={setFixedEvents} /> :  <Form submitHandler={onSubmit}></Form>}
+    </div>
   );
 }
 
