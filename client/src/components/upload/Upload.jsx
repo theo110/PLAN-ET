@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import moment from "moment";
 import icsToJson from "ics-to-json";
 import sortEvents from "../../utils/eventSorter";
+import { splitEventsByDay } from "../../utils/momentOperations";
 /*import { useDropzone } from "React-dropzone";
 
 function Dropzone({ open }) {
@@ -38,7 +39,7 @@ function Upload(props) {
     const reader = new FileReader();
     reader.onload = (readerEvent) => {
       const result = icsToJson(readerEvent.target.result);
-      setParsedCalendarEvents(sortEvents(jsonToCalendar(result)));
+      setParsedCalendarEvents(splitEventsByDay(sortEvents(jsonToCalendar(result))));
     };
     reader.readAsText(e.target.files[0]);
   };

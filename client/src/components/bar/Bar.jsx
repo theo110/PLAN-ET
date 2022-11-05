@@ -1,14 +1,14 @@
-import {Typography, Button, Toolbar, AppBar} from '@mui/material';
+import { Typography, Button, Toolbar, AppBar } from '@mui/material';
 
 const Bar = () => {
-    return(
+    return (
         <div>
-        <AppBar position="absolute" color="primary">
-            <Toolbar>
-                <Typography>Name of Project</Typography>
-                <Button>Login/Logout</Button>
-            </Toolbar>
-        </AppBar>
+            <AppBar position="absolute" color="primary">
+                <Toolbar>
+                    <Typography>Name of Project</Typography>
+                    <Button>Login/Logout</Button>
+                </Toolbar>
+            </AppBar>
         </div>
     )
 }
