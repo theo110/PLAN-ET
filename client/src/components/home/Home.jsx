@@ -131,21 +131,16 @@ function Home(props) {
     // test calendar
     const navigate = useNavigate();
 
-    return (
-        <>
-            <Upload setEventEntries={setEventEntries} />
-            {fixedEvents.length === 0 ? (
-                <div>
-                    <Form submitHandler={onSubmit}></Form>
-                    <button type='button' onClick={() => navigate("/calendar")}>
-                        Test calendar
-                    </button>
-                </div>
-            ) : (
-                <div></div>
-            )}
-        </>
-    );
+  return (
+    <>
+      <Upload setFixedEvents={setFixedEvents} />
+      <Form submitHandler={onSubmit}></Form>
+      <button type='button' onClick={() => navigate("/calendar")}>
+        Test calendar
+      </button>
+      {fixedEvents.length === 0 ? <div></div> : <div></div>}
+    </>
+  );
 }
 
 export default Home;

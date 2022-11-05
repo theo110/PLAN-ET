@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import icsToJson from "ics-to-json";
 
 function Upload(props) {
-  const { setEventEntries } = props;
+  const { setFixedEvents } = props;
   const [jsonResult, setJsonResult] = useState({});
 
   const icsJsonToCalendar = (icsJson) => {
@@ -27,9 +27,9 @@ function Upload(props) {
 
   useEffect(() => {
     if (jsonResult) {
-      setEventEntries(jsonResult);
+      setFixedEvents(jsonResult);
     }
-  }, [jsonResult, setEventEntries]);
+  }, [jsonResult, setFixedEvents]);
 
   return (
     <div>
