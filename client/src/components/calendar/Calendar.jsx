@@ -1,14 +1,18 @@
-import "react-big-calendar/lib/css/react-big-calendar.css";
+import React from "react";
+import FullCalendar from "@fullcalendar/react";
+import timeGridPlugin from "@fullcalendar/timegrid";
 
-import { Calendar, momentLocalizer } from "react-big-calendar";
-import moment from "moment";
+const Calendar = () => {
+  return (
+    <FullCalendar
+      plugins={[timeGridPlugin]}
+      initialView='timeGridWeek'
+      events={[
+        { title: "event 1", start: "2022-11-05T03:24:00", end: "2022-11-05T05:24:00" },
+        { title: "event 1", start: "2022-11-05T07:24:00", end: "2022-11-05T12:24:00" },
+      ]}
+    />
+  );
+};
 
-const localizer = momentLocalizer(moment);
-
-const MyCalendar = (props) => (
-  <div>
-    <Calendar localizer={localizer} startAccessor='start' endAccessor='end' style={{ height: 500 }} />
-  </div>
-);
-
-export default MyCalendar;
+export default Calendar;
