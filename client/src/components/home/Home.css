@@ -58,9 +58,16 @@
     float: left
 }
 
+.bigLogo {
+  margin-top: 15vh;
+  margin-right: auto;
+  margin-left: auto;
+  width: 17vw;
+}
+
 .container3{
     font-family: "Roboto";
-    margin-top: 35vh;
+    margin-top: 5vh;
     width: 100vw;
     display: flex;
 }

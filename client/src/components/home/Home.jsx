@@ -10,6 +10,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 import { Paper, Container, Typography, TextField, Grid, Button, Snackbar, Alert } from "@mui/material";
 import Typewriter from "typewriter-effect";
+import { ReactComponent as Logo } from "../../assets/logo.svg"
 
 const Form = (props) => {
     const [customField, setCustomField] = useState([]);
@@ -272,6 +273,9 @@ function Home(props) {
         } else {
             return (
                 <div>
+                    <div className="bigLogo">
+                        <Logo width="100%" />
+                    </div>
                     <div className="container3">
                         <div className="left">
                             <Typography className="rightt" variant='h2' color='secondary'>
@@ -287,8 +291,9 @@ function Home(props) {
                                         loop: true,
                                         delay: 0,
                                         strings: [
-                                            "academic career.",
                                             "week.",
+                                            "academic career.",
+                                            "rest.",
                                             "daily life.",
                                         ]
                                     }}
