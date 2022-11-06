@@ -3,7 +3,7 @@ import moment from "moment";
 export const splitEventsByDay = (events) => {
   let result = [[], [], [], [], [], [], []];
   events.forEach((e) => {
-    result[e.start.day()].push(e);
+    result[e.start?.day()]?.push(e);
   });
   return result;
 };
@@ -30,7 +30,6 @@ export const incrementBy = (date, hours) => {
   return date.clone().add(hours, "hours");
 };
 
-export const timeDifferenceBetweenDates = (d1, d2) => {
-  const offset = d1 - d2;
-  return moment(offset);
+export const hourDifferenceBetweenDates = (d1, d2) => {
+  return d1?.diff(d2, "hours", true);
 };
