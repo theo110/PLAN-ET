@@ -3,7 +3,7 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import Home from "./components/home/Home";
 import Calendar from "./components/calendar/Calendar";
 import Bar from "./components/bar/Bar";
-import Loading from "./components/auth/Loading";
+import Loading from "./components/loading/Loading";
 import { useAuth0 } from "@auth0/auth0-react";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 

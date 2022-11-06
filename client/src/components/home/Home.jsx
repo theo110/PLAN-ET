@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router";
 import Upload from "../upload/Upload";
+import Loading from "../loading/Loading";
+
 import { algorithm } from "../../utils/eventSorter";
 import { thisSunday, flattenEvents } from "../../utils/momentOperations";
 import "./Home.css";
@@ -227,9 +229,7 @@ function Home(props) {
           }
     } else {
         return (
-            <div className="container2">
-                <CircularProgress color="secondary" size='25vh' />
-            </div>
+            <Loading></Loading>
         )
     }
 }
