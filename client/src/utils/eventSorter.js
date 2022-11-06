@@ -13,8 +13,8 @@ const getPotential = (events, start, end) => {
   let potential = [];
   let current = start;
   for (let i = 0; i < events.length && current < end; ++i) {
-    startDate = events[i].start;
-    endDate = events[i].end;
+    var startDate = events[i].start;
+    var endDate = events[i].end;
     if (current < startDate) {
       potential.push([current, startDate]);
       current = endDate;
@@ -29,7 +29,7 @@ const algorithm = (fixedEvents, freeEvents, start) => {
   var allEvents = [];
   var allPotentials = []
   for (var i = 0; i < 7; i++) {
-    allPotentials[i].append(getPotential(currentEvents, incrementBy(start,24*i), incrementBy(start, 24*(i+1))));
+    allPotentials[i].append(getPotential(fixedEvents, incrementBy(start,24*i), incrementBy(start, 24*(i+1))));
     console.log(allPotentials)
   }
 
@@ -45,7 +45,7 @@ const algorithm = (fixedEvents, freeEvents, start) => {
       allPotentials[i].remove()
 
       //Check time at previous night
-      if (hourDifferenceBetweenDates(allPotentials[compliment][allPotentials[compliment].length - 1][1],allPotentials[compliment][allPotentials[compliment].length - 1][0]) < fixedEvent[0].time) {
+      if (hourDifferenceBetweenDates(allPotentials[compliment][allPotentials[compliment].length - 1][1],allPotentials[compliment][allPotentials[compliment].length - 1][0]) < fixedEvents[0].time) {
         //If not possible, then can't sleep
         return [];
       } else {
@@ -66,7 +66,7 @@ const algorithm = (fixedEvents, freeEvents, start) => {
         if (hourDifferenceBetweenDates(allPotentials[i][l][1],allPotentials[i][l][0])< freeEvents[k].time) {
 
           //Make sure end - start = allPotenials[i][l][1] - allPotentials[i][l][0]
-          allEvents[i].append({ title: freeEvents[k].name, start: allPotentials[i][l][0], end: allPotenials[i][l][1]})
+          allEvents[i].append({ title: freeEvents[k].name, start: allPotentials[i][l][0], end: allPotentials[i][l][1]})
           freeEvents[k].time -= hourDifferenceBetweenDates(allPotentials[i][l][1],allPotentials[i][l][0]);
           allPotentials[i].remove(l);
         }
