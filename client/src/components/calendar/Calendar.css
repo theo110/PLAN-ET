@@ -29,3 +29,16 @@
 .fc-day-today {
   background-color: inherit !important;
 }
+
+::-webkit-scrollbar{
+    width: .6em;
+    height: 0.5em;
+}
+::-webkit-scrollbar-track{
+    border-radius: 100em;
+    background-color: #ffffff;
+}
+::-webkit-scrollbar-thumb{
+    background: #e24329;
+    border-radius: 100em;
+}
