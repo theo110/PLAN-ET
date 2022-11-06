@@ -1,17 +1,24 @@
 import moment from "moment";
 
-export const splitEventsByDay = (events) => {
-  let result = [[], [], [], [], [], [], []];
-  events.forEach((e) => {
-    result[e.start?.day()]?.push(e);
-  });
-  return result;
-};
+export const thisSunday = moment().startOf("week");
 
 export const transposeToThisWeek = (date) => {
   const offset = date - date?.clone()?.startOf("week");
   const newDate = moment(moment() + offset);
   return newDate;
+};
+
+export const splitEventsByDay = (events) => {
+  let result = [[], [], [], [], [], [], []];
+  events.forEach((e) => {
+    const transPosedEvent = {
+      title: e.title,
+      start: transposeToThisWeek(e.start),
+      end: transposeToThisWeek(e.end),
+    };
+    result[transPosedEvent.start?.day()]?.push(transPosedEvent);
+  });
+  return result;
 };
 
 export const flattenEvents = (weekOfEvents) => {
