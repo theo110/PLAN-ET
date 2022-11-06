@@ -4,7 +4,7 @@ export const thisSunday = moment().startOf("week");
 
 export const transposeToThisWeek = (date) => {
   const offset = date - date?.clone()?.startOf("week");
-  const newDate = incrementBy(moment(thisSunday + offset),1);
+  const newDate = incrementBy(moment(thisSunday + offset), 1);
   return newDate;
 };
 
@@ -39,4 +39,16 @@ export const incrementBy = (date, hours) => {
 
 export const hourDifferenceBetweenDates = (d1, d2) => {
   return d1?.diff(d2, "hours", true);
+};
+
+export const toDayOfWeek = (n) => {
+  let weekday = [];
+  weekday[0] = "Monday";
+  weekday[1] = "Tuesday";
+  weekday[2] = "Wednesday";
+  weekday[3] = "Thursday";
+  weekday[4] = "Friday";
+  weekday[5] = "Saturday";
+  weekday[6] = "Sunday";
+  return weekday[n];
 };
