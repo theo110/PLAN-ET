@@ -36,7 +36,7 @@ export const algorithm = (fixedEvents, freeEvents, start) => {
 
   for (var i = 0; i < 7; i++) {
     //Sleep Time
-    var compliment = i == 0 ? 6 : i - 1;
+    var compliment = (i == 0) ? 6 : i - 1;
     //12 - x not enough
     if (hourDifferenceBetweenDates(allPotentials[i][0][1], allPotentials[i][0][0]) < freeEvents[0].time) {
       //Subtract time from current day
@@ -62,70 +62,73 @@ export const algorithm = (fixedEvents, freeEvents, start) => {
     }
   }
 
-  //Meal Time
-  //Breakfast
-  /*
-  let j = 0;
-  let found = false;
-  for (; j < allPotentials[i].length && incrementBy(allPotentials[i][j][0], freeEvents[1].time).hour <= 10; ++j) {
-    if (hourDifferenceBetweenDates(allPotentials[i][j][1], allPotentials[i][j][0]) >= freeEvents[1].time) {
-      allEvents.push({title: freeEvents[1].name, start: allPotentials[i][j][0], end: incrementBy(allPotentials[i][j][0], freeEvents[1].time)});
-      allPotentials[i][j][0].hours += freeEvents[1].time;
-      found = true;
-      break;
-    }
-  }
-  if (!found) {
-    //throw error
-  }
-  found = false;
-  //Lunch
-  for (
-    ;
-    j < allPotentials[i].length &&
-    (allPotentials[i][j][0].hour >= 11 ||
-      incrementBy(allPotentials[i][j][1], -freeEvents[1].time).hour >= 11) &&
-    incrementBy(allPotentials[i][j][0], freeEvents[1].time).hour <= 2;
-    ++j
-  ) {
-    if (
-      hourDifferenceBetweenDates(
-        allPotentials[i][j][1],
-        allPotentials[i][j][0]
-      ) >= freeEvents[1].time
-    ) {
-      if (allPotentials[i][j][0].hours >= 11) {
-        allEvents.push({title: freeEvents[1].name, start: allPotentials[i][j][0], end: incrementBy(allPotentials[i][j][0], freeEvents[i].time)});
+  for (var i = 0; i < 7; i++) {
+
+    //Meal Time
+    //Breakfast
+    console.log(freeEvents[1])
+    let j = 0;
+    let found = false;
+    for (; j < allPotentials[i].length && incrementBy(allPotentials[i][j][0], freeEvents[1].time).hour <= 10; ++j) {
+      if (hourDifferenceBetweenDates(allPotentials[i][j][1], allPotentials[i][j][0]) >= freeEvents[1].time) {
+        allEvents.push({ title: freeEvents[1].name, start: allPotentials[i][j][0], end: incrementBy(allPotentials[i][j][0], freeEvents[1].time) });
         allPotentials[i][j][0].hours += freeEvents[1].time;
-      } else {
-        allEvents.push({title: freeEvents[1].name, start: incrementBy(allPotentials[i][j][1], -freeEvents[1].time), end: allPotentials[i][j][1]});
-        allPotentials[i][j][1].hours -= freeEvents[1].time;
+        found = true;
+        break;
       }
-      found = true;
-      break;
     }
-  }
-  if (!found) {
-    //throw error
-  }
-  found = false;
-  //Dinner
-  for (; j < allPotentials[i].length && allPotentials[i][j][0].hours >= 5; ++j) {
-    if (hourDifferenceBetweenDates(allPotentials[i][j][1], allPotentials[i][j][0]) >= freeEvents[1].time) {
-      allEvents.push({title: freeEvents[1].name, start: allPotentials[i][j][0], end: incrementBy(allPotentials[i][j][0], freeEvents[i].time)});
-      allPotentials[i][j][0].hours += freeEvents[1].time;
-      found = true;
-      break;
+    if (!found) {
+      //throw error
     }
+    found = false;
+    //Lunch
+    for (
+      ;
+      j < allPotentials[i].length &&
+      (allPotentials[i][j][0].hour >= 11 ||
+        incrementBy(allPotentials[i][j][1], -freeEvents[1].time).hour >= 11) &&
+      incrementBy(allPotentials[i][j][0], freeEvents[1].time).hour <= 2;
+      ++j
+    ) {
+      if (
+        hourDifferenceBetweenDates(
+          allPotentials[i][j][1],
+          allPotentials[i][j][0]
+        ) >= freeEvents[1].time
+      ) {
+        if (allPotentials[i][j][0].hours >= 11) {
+          allEvents.push({ title: freeEvents[1].name, start: allPotentials[i][j][0], end: incrementBy(allPotentials[i][j][0], freeEvents[i].time) });
+          allPotentials[i][j][0].hours += freeEvents[1].time;
+        } else {
+          allEvents.push({ title: freeEvents[1].name, start: incrementBy(allPotentials[i][j][1], -freeEvents[1].time), end: allPotentials[i][j][1] });
+          allPotentials[i][j][1].hours -= freeEvents[1].time;
+        }
+        found = true;
+        break;
+      }
+    }
+    if (!found) {
+      //throw error
+    }
+    found = false;
+    //Dinner
+    for (; j < allPotentials[i].length && allPotentials[i][j][0].hours >= 5; ++j) {
+      if (hourDifferenceBetweenDates(allPotentials[i][j][1], allPotentials[i][j][0]) >= freeEvents[1].time) {
+        allEvents.push({ title: freeEvents[1].name, start: allPotentials[i][j][0], end: incrementBy(allPotentials[i][j][0], freeEvents[i].time) });
+        allPotentials[i][j][0].hours += freeEvents[1].time;
+        found = true;
+        break;
+      }
+    }
+    if (!found) {
+      //throw eror
+    }
+
   }
-  if (!found) {
-    //throw eror
-  }
-  */
 
   //Other
   for (var i = 0; i < 7; i++) {
-    for (var k = 1; k < freeEvents.length; k++) {
+    for (var k = 2; k < freeEvents.length; k++) {
       if (freeEvents[k].time === 0) continue;
       var eventTime = freeEvents[k].time
 
@@ -139,7 +142,7 @@ export const algorithm = (fixedEvents, freeEvents, start) => {
           ) < freeEvents[k].time
         ) {
           //Make sure end - start = allPotenials[i][l][1] - allPotentials[i][l][0]
-          if(allPotentials[i][l][1]-allPotentials[i][l][0]==0) continue;
+          if (allPotentials[i][l][1] - allPotentials[i][l][0] == 0) continue;
           allEvents.push({ title: freeEvents[k].name, start: allPotentials[i][l][0], end: allPotentials[i][l][1] })
           freeEvents[k].time -= hourDifferenceBetweenDates(allPotentials[i][l][1], allPotentials[i][l][0]);
           allPotentials[i][l][0] = allPotentials[i][l][1];
