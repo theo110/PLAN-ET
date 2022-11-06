@@ -34,7 +34,7 @@ export const flattenEvents = (weekOfEvents) => {
 };
 
 export const incrementBy = (date, hours) => {
-  return date.clone().add(hours, "hours");
+  return date?.clone().add(hours, "hours");
 };
 
 export const hourDifferenceBetweenDates = (d1, d2) => {

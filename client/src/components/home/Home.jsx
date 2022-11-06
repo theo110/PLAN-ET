@@ -19,8 +19,9 @@ const Form = (props) => {
 
     const formik = useFormik({
         initialValues: {
-            sleep: '',
-            study: '',
+            sleep: 0,
+            study: 0,
+
         },
         onSubmit: props.submitHandler,
     });
