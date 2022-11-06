@@ -4,7 +4,7 @@ export const thisSunday = moment().startOf("week");
 
 export const transposeToThisWeek = (date) => {
   const offset = date - date?.clone()?.startOf("week");
-  const newDate = moment(moment() + offset);
+  const newDate = moment(thisSunday + offset);
   return newDate;
 };
 
