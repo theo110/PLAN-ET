@@ -6,7 +6,6 @@ import { algorithm } from "../../utils/eventSorter";
 import { thisSunday, flattenEvents } from "../../utils/momentOperations";
 import "./Home.css";
 import { useAuth0 } from "@auth0/auth0-react";
-import Loading from "../auth/Loading";
 
 import { Paper, Container, Typography, TextField, Grid, Button, CircularProgress } from "@mui/material";
 
@@ -178,12 +177,6 @@ function Home(props) {
         }
     }, [otherEvents])
 
-    const testCal = () => {
-        setEventEntries(fixedEvents);
-        console.log(fixedEvents)
-        navigate("/calendar")
-    }
-
 
     //Aggregate form data
     const onSubmit = (values) => {
@@ -217,16 +210,21 @@ function Home(props) {
         setOtherEvents(sorted);
         console.log(otherEvents);
     };
-
+    const { isAuthenticated } = useAuth0();
     if (!isFakeLoading) {
-        return (
-            <div className="container">
-                <button type='button' onClick={() => testCal()}>
-                    Test calendar
-                </button>
-                {(Object.keys(fixedEvents).length === 0) ? <Upload setFixedEvents={setFixedEvents} /> : <Form submitHandler={onSubmit}></Form>}
-            </div>
-        );
+        if (isAuthenticated === true) {
+            return (
+              <div className="container">
+                {Object.keys(fixedEvents).length === 0 ? (
+                  <Upload setFixedEvents={setFixedEvents} />
+                ) : (
+                  <Form submitHandler={onSubmit}></Form>
+                )}
+              </div>
+            );
+          } else {
+            return <p>Please log in to use the feature!</p>;
+          }
     } else {
         return (
             <div className="container2">
