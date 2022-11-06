@@ -3,6 +3,9 @@ import { Typography, Button, TextField, InputAdornment } from "@mui/material";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router";
 import Upload from "../upload/Upload";
+import { algorithm } from "../../utils/eventSorter";
+import { thisSunday } from "../../utils/momentOperations";
+
 import "./Home.css";
 
 
@@ -107,6 +110,7 @@ function Home(props) {
     useEffect(() => {        
         if (otherEvents.length !== 0) {
             console.log(JSON.stringify(otherEvents));
+            algorithm(fixedEvents,otherEvents,thisSunday)
         }
     }, [otherEvents])
 

@@ -1,15 +1,13 @@
 import { incrementBy, hourDifferenceBetweenDates} from "./momentOperations";
 
-const sortEvents = (eventEntries) => {
+export const sortEvents = (eventEntries) => {
   const chronologicalComparator = (e1, e2) => {
     return e1.start < e2.start ? -1 : e1.start === e2.start ? 0 : 1;
   };
   return eventEntries.sort(chronologicalComparator);
 };
 
-export default sortEvents;
-
-const getPotential = (events, start, end) => {
+export const getPotential = (events, start, end) => {
   let potential = [];
   let current = start;
   for (let i = 0; i < events.length && current < end; ++i) {
@@ -56,7 +54,7 @@ const algorithm = (fixedEvents, freeEvents, start) => {
     } else {
       //Can sleep 12 - x 
       allEvents[i].append({ title: freeEvents[k].name, start: allPotentials[i][0][0], end: incrementBy(allPotentials[i][0][0],fixedEvents[0].time)})
-      allPotentials[i][0][0] + incrementBy(allPotentials[i][0][0],fixedEvents[0].time);
+      allPotentials[i][0][0] = incrementBy(allPotentials[i][0][0],fixedEvents[0].time);
     }
 
     //Meal Time

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import moment from "moment";
 import icsToJson from "ics-to-json";
-import sortEvents from "../../utils/eventSorter";
+import {sortEvents} from "../../utils/eventSorter";
 import { splitEventsByDay } from "../../utils/momentOperations";
 /*import { useDropzone } from "React-dropzone";
 
