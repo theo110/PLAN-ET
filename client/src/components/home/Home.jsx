@@ -35,7 +35,7 @@ const Form = (props) => {
     return (
         <Container className='form'>
             <Paper className='paper'>
-                <Typography variant='h4' className='formHeader' color='primary'>
+                <Typography variant='h4' className='formHeader' color='secondary'>
                     Enter your weekly plans
                 </Typography>
                 <form onSubmit={formik.handleSubmit} id='form'>
@@ -49,7 +49,7 @@ const Form = (props) => {
                             <TextField color='primary' fullWidth id='sleep' name='sleep' type='number' min='0' onChange={formik.handleChange} value={formik.values.sleep} />
                         </Grid>
                         <Grid item xs='2' className='suffix'>
-                            <Typography color='secondary'>
+                            <Typography color='secondary.darker'>
                                 hrs/day
                             </Typography>
                         </Grid>
@@ -64,7 +64,7 @@ const Form = (props) => {
                             <TextField fullWidth id='study' name='study' type='number' min='0' onChange={formik.handleChange} value={formik.values.study} />
                         </Grid>
                         <Grid item xs='2' className='suffix'>
-                            <Typography color='secondary'>
+                            <Typography color='secondary.darker'>
                                 hrs/day
                             </Typography>
                         </Grid>
@@ -79,7 +79,7 @@ const Form = (props) => {
                             <TextField fullWidth id='meal' name='meal' type='number' step='any' min='0' onChange={formik.handleChange} value={formik.values.meal} />
                         </Grid>
                         <Grid item xs='2' className='suffix'>
-                            <Typography color='secondary'>
+                            <Typography color='secondary.darker'>
                                 hrs/day
                             </Typography>
                         </Grid>
