@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Typography, Button, TextField, InputAdornment } from "@mui/material";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router";
 import Upload from "../upload/Upload";
@@ -7,11 +6,11 @@ import { algorithm } from "../../utils/eventSorter";
 import { thisSunday } from "../../utils/momentOperations";
 
 import "./Home.css";
-
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Form = (props) => {
-    const [customField, setCustomField] = useState([]);
-    const [custom, setCustom] = useState("");
+  const [customField, setCustomField] = useState([]);
+  const [custom, setCustom] = useState("");
 
     const addEntry = () => {
         setCustomField([...customField, custom])
