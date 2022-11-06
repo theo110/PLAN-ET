@@ -53,7 +53,7 @@ function Upload(props) {
       } else {
         const reader = new FileReader();
         reader.onload = (readerEvent) => {
-          const result = icsToJson(readerEvent.target.result);
+          const result = icsToJson(readerEvent.target.result);  
           setParsedCalendarEvents(splitEventsByDay(sortEvents(jsonToCalendar(result))));
         };
         reader.readAsText(acceptedFiles[0]);
