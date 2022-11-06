@@ -25,3 +25,12 @@
   margin: 4px 2px;
   cursor: pointer;
 }
+
+.logo {
+  padding-right: 0.8rem;
+}
+
+.logo-container {
+  display: flex;
+  cursor: pointer;
+}

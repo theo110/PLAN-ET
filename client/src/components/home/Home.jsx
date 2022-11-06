@@ -168,7 +168,7 @@ function Home(props) {
             console.log(JSON.stringify(otherEvents));
             var result = algorithm(fixedEvents, otherEvents, thisSunday)
             for (const fixedEvent of flattenEvents(fixedEvents)) {
-                result.push(fixedEvent);
+                result.push({...fixedEvent, backgroundColor: "#e24329"});
             }
             setEventEntries(result);
             setFakeLoading(true)
