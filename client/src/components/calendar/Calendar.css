@@ -1,30 +1,26 @@
-
 .fc-col-header-cell-cushion {
-    color: #fc6d26;
-    font-size: 5vh;
-    font-family: "Roboto";
+  color: #fc6d26;
+  font-size: 5vh;
+  font-family: "Roboto";
 }
 
 .fc-timegrid-slot-label-cushion {
-    color: #e24329;
-    font-family: "Roboto";
+  color: #e24329;
+  font-family: "Roboto";
 }
 
-
-.fc-event-main{
-    background-color: #fca326
-    ;
-    border-width: 0px;
+.fc-event-main {
+  /* background-color: #fca326; */
+  border-width: 0px;
 }
 
-.fc-timegrid-event{
-    background-color:#fca326;
-    border-width: 0px;
-    font-family: "Roboto";
-    font-size: 2.2vh;
+.fc-timegrid-event {
+  background-color: #fc8a26;
+  border-width: 0px;
+  font-family: "Roboto";
+  font-size: 2.2vh;
 }
 
-.fc-highlight
-{
-  background-color:inherit !important;
+.fc-highlight {
+  background-color: inherit !important;
 }

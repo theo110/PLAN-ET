@@ -7,6 +7,8 @@ export const sortEvents = (eventEntries) => {
   return eventEntries.sort(chronologicalComparator);
 };
 
+const sleepColor = "#fca326";
+
 export const getPotential = (events, start, end) => {
   let potential = [];
   let current = start;
@@ -40,7 +42,7 @@ export const algorithm = (fixedEvents, freeEvents, start) => {
     //12 - x not enough
     if (hourDifferenceBetweenDates(allPotentials[i][0][1], allPotentials[i][0][0]) < freeEvents[0].time) {
       //Subtract time from current day
-      allEvents.push({ title: freeEvents[0].name, start: allPotentials[i][0][0], end: allPotentials[i][0][1] })
+      allEvents.push({ title: freeEvents[0].name, start: allPotentials[i][0][0], end: allPotentials[i][0][1], backgroundColor: sleepColor })
 
       let carry = freeEvents[0].time - hourDifferenceBetweenDates(allPotentials[i][0][1], allPotentials[i][0][0])
       allPotentials[i].splice(0, 1)
@@ -52,12 +54,12 @@ export const algorithm = (fixedEvents, freeEvents, start) => {
         return [];
       } else {
         //Subtract time from night
-        allEvents.push({ title: freeEvents[0].name, start: incrementBy(allPotentials[compliment][allPotentials[compliment].length - 1][1], -carry), end: allPotentials[compliment][allPotentials[compliment].length - 1][1] })
+        allEvents.push({ title: freeEvents[0].name, start: incrementBy(allPotentials[compliment][allPotentials[compliment].length - 1][1], -carry), end: allPotentials[compliment][allPotentials[compliment].length - 1][1], backgroundColor: sleepColor })
         allPotentials[compliment][allPotentials[compliment].length - 1][1] = incrementBy(allPotentials[compliment][allPotentials[compliment].length - 1][1], carry);
       }
     } else {
       //Can sleep 12 - x 
-      allEvents.push({ title: freeEvents[0].name, start: allPotentials[i][0][0], end: incrementBy(allPotentials[i][0][0], freeEvents[0].time) })
+      allEvents.push({ title: freeEvents[0].name, start: allPotentials[i][0][0], end: incrementBy(allPotentials[i][0][0], freeEvents[0].time), backgroundColor: sleepColor })
       allPotentials[i][0][0] = incrementBy(allPotentials[i][0][0], freeEvents[0].time);
     }
   }
