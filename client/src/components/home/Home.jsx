@@ -168,7 +168,7 @@ function Home(props) {
             console.log(JSON.stringify(otherEvents));
             var result = algorithm(fixedEvents, otherEvents, thisSunday)
             for (const fixedEvent of flattenEvents(fixedEvents)) {
-                result.push({...fixedEvent, backgroundColor: "#e24329"});
+                result.push({ ...fixedEvent, backgroundColor: "#e24329" });
             }
             setEventEntries(result);
             setFakeLoading(true)
@@ -226,32 +226,57 @@ function Home(props) {
             );
         } else {
             return (
-                <div className="container">
-                    <div className="left">
-                        <Typography className="rightt"variant='h2' color='secondary'>
-                            Plan your:
-                        </Typography>
-                    </div>
+                <div>
+                    <div className="container3">
+                        <div className="left">
+                            <Typography className="rightt" variant='h2' color='secondary'>
+                                Plan your:
+                            </Typography>
+                        </div>
 
-                    <div className="right">
-                        <Typography className="leftt" variant='h2' color='primary'>
-                            <Typewriter
-                                options={{
-                                    autoStart: true,
-                                    loop: true,
-                                    delay: 0,
-                                    strings: [
-                                        "academic career.",
-                                        "week.",
-                                        "daily life.",
-                                    ]
-                                }}
-                            >
-                            </Typewriter>
-                        </Typography>
+                        <div className="right">
+                            <Typography className="leftt" variant='h2' color='primary'>
+                                <Typewriter
+                                    options={{
+                                        autoStart: true,
+                                        loop: true,
+                                        delay: 0,
+                                        strings: [
+                                            "academic career.",
+                                            "week.",
+                                            "daily life.",
+                                        ]
+                                    }}
+                                >
+                                </Typewriter>
+                            </Typography>
+                        </div>
+                        <div>
+                        </div>
                     </div>
-
-                </div>
+                    <div className="alignplus">
+                        <div className="align">
+                            <Typography className="fullw" variant='h4' color='secondary.darker'>
+                                PLAN-ET allows you to conviniently plan out weekly schedules hastle free
+                            </Typography>
+                        </div>
+                        <div className="align">
+                            <Typography className="fullw" variant='h4' color='primary'>
+                                1. Login/Create a free account
+                            </Typography>
+                        </div>
+                        <div className="align">
+                            <Typography className="fullw" variant='h4' color='primary'>
+                                2. Upload your class schedule
+                            </Typography>
+                        </div>
+                        <div className="align">
+                            <Typography className="fullw" variant='h4' color='primary'>
+                                3. Fill out your weekly plans
+                            </Typography>
+                        </div>
+                    </div>
+                </div >
             )
         }
     } else {

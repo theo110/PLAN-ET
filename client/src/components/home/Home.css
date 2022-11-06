@@ -39,20 +39,45 @@
 
 .left{
     width: 50vw;
+    margin-right: 20px;
 }
 
 .right{
-    width: 50vw
+    width: 50vw;
+    margin-left: 20px;
 }
 
 .rightt{
-    margin-right: 10px;
     width: 17vw;
     float: right
 }
 
 .leftt{
-    margin-left: 10px;
+    font-family: "Roboto";
     width: 40vw;
     float: left
+}
+
+.container3{
+    font-family: "Roboto";
+    margin-top: 20vh;
+    width: 100vw;
+    display: flex;
+}
+
+.align{
+    margin-top: 2vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.alignplus{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.fullw{
+    width: 100vw;
 }
