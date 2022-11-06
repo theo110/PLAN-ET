@@ -1,6 +1,7 @@
 import AuthNav from "../auth/auth-nav";
 import AuthenticationButton from "../auth/authentication-button";
 import "./bar.css";
+import { AppBar, Typography, Toolbar} from "@mui/material";
 
 const Bar = () => {
   return (
@@ -8,7 +9,7 @@ const Bar = () => {
       <AppBar position="absolute" color="tertiary">
         <Toolbar>
           <Typography>Name of Project</Typography>
-          <AuthNav />
+          <AuthenticationButton />
         </Toolbar>
       </AppBar>
     </div>
