@@ -8,21 +8,21 @@ import "./Home.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import Loading from "../auth/Loading";
 
-import { Paper, Container, Typography, TextField, Grid, Button } from "@mui/material";
+import { Paper, Container, Typography, TextField, Grid, Button, CircularProgress } from "@mui/material";
 
 const Form = (props) => {
     const [customField, setCustomField] = useState([]);
     const [custom, setCustom] = useState("");
 
-  const addEntry = () => {
-    const existingTasks = ["sleep", "meal", "study"];
-    if (existingTasks.includes(custom)) {
-      alert(`Please enter a task other than ${custom}`);
-    } else {
-      setCustomField([...customField, custom]);
-      console.log(customField);
-    }
-  };
+    const addEntry = () => {
+        const existingTasks = ["sleep", "meal", "study"];
+        if (existingTasks.includes(custom)) {
+            alert(`Please enter a task other than ${custom}`);
+        } else {
+            setCustomField([...customField, custom]);
+            console.log(customField);
+        }
+    };
 
     const formik = useFormik({
         initialValues: {
@@ -35,26 +35,28 @@ const Form = (props) => {
     return (
         <Container className='form'>
             <Paper className='paper'>
-                <Typography variant='h4' className='formHeader'>
+                <Typography variant='h4' className='formHeader' color='primary'>
                     Enter your weekly plans
                 </Typography>
                 <form onSubmit={formik.handleSubmit} id='form'>
                     <Grid container className='inputGroup' alignItems='center'>
                         <Grid item xs='5' className='label'>
-                            <Typography htmlFor='sleep' justifyContent='center'>
+                            <Typography htmlFor='sleep' justifyContent='center' color='primary'>
                                 How long do you sleep?
                             </Typography>
                         </Grid>
                         <Grid item xs='4'>
-                            <TextField fullWidth id='sleep' name='sleep' type='number' min='0' onChange={formik.handleChange} value={formik.values.sleep} />
+                            <TextField color='primary' fullWidth id='sleep' name='sleep' type='number' min='0' onChange={formik.handleChange} value={formik.values.sleep} />
                         </Grid>
                         <Grid item xs='2' className='suffix'>
-                            hrs/day
+                            <Typography color='secondary'>
+                                hrs/day
+                            </Typography>
                         </Grid>
                     </Grid>
                     <Grid container className='inputGroup' alignItems='center'>
                         <Grid item xs='5'>
-                            <Typography className='label' htmlFor='study'>
+                            <Typography className='label' htmlFor='study' color='primary'>
                                 How long do you study?
                             </Typography>
                         </Grid>
@@ -62,12 +64,14 @@ const Form = (props) => {
                             <TextField fullWidth id='study' name='study' type='number' min='0' onChange={formik.handleChange} value={formik.values.study} />
                         </Grid>
                         <Grid item xs='2' className='suffix'>
-                            hrs/day
+                            <Typography color='secondary'>
+                                hrs/day
+                            </Typography>
                         </Grid>
                     </Grid>
                     <Grid container className='inputGroup' alignItems='center'>
                         <Grid item xs='5'>
-                            <Typography className='label' htmlFor='meal'>
+                            <Typography className='label' htmlFor='meal' color='primary'>
                                 How long do spend eating?
                             </Typography>
                         </Grid>
@@ -75,13 +79,15 @@ const Form = (props) => {
                             <TextField fullWidth id='meal' name='meal' type='number' step='any' min='0' onChange={formik.handleChange} value={formik.values.meal} />
                         </Grid>
                         <Grid item xs='2' className='suffix'>
-                            hrs/meal
+                            <Typography color='secondary'>
+                                hrs/day
+                            </Typography>
                         </Grid>
                     </Grid>
                     {customField.map((field) => (
                         <Grid container className='inputGroup' alignItems='center'>
                             <Grid item xs='5'>
-                                <Typography className='label' htmlFor='custom'>
+                                <Typography className='label' htmlFor='custom' color='primary'>
                                     How long do spend on {field}?
                                 </Typography>
                             </Grid>
@@ -89,13 +95,15 @@ const Form = (props) => {
                                 <TextField fullWidth id={field} name={field} type='number' min='0' onChange={formik.handleChange} value={formik.values[field]} />
                             </Grid>
                             <Grid item xs='2' className='suffix'>
-                                hrs/day
+                                <Typography color='secondary'>
+                                    hrs/day
+                                </Typography>
                             </Grid>
                         </Grid>
                     ))}
                     <Grid container className='inputGroup' alignItems='center'>
                         <Grid item xs='4'>
-                            <Typography className='label' htmlFor='custom'>
+                            <Typography className='label' htmlFor='custom' color='primary'>
                                 Add your own custom event:
                             </Typography>
                         </Grid>
@@ -202,7 +210,7 @@ function Home(props) {
         console.log(otherEvents);
     };
 
-    if(!isFakeLoading){
+    if (!isFakeLoading) {
         return (
             <div className="container">
                 <button type='button' onClick={() => testCal()}>
@@ -211,10 +219,10 @@ function Home(props) {
                 {(Object.keys(fixedEvents).length === 0) ? <Upload setFixedEvents={setFixedEvents} /> : <Form submitHandler={onSubmit}></Form>}
             </div>
         );
-    }else{
+    } else {
         return (
             <div className="container2">
-                <Loading></Loading>
+                <CircularProgress color="secondary" size='25vh' />
             </div>
         )
     }

@@ -4,7 +4,7 @@ import AuthNav from "../auth/auth-nav";
 const Bar = () => {
   return (
     <div>
-      <AppBar position="absolute" color="primary">
+      <AppBar position="absolute" color="tertiary">
         <Toolbar>
           <Typography>Name of Project</Typography>
           <AuthNav />
