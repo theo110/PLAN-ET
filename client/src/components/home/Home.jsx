@@ -3,13 +3,13 @@ import { useFormik } from "formik";
 import { useNavigate } from "react-router";
 import Upload from "../upload/Upload";
 import Loading from "../loading/Loading";
-
 import { algorithm } from "../../utils/eventSorter";
 import { thisSunday, flattenEvents } from "../../utils/momentOperations";
 import "./Home.css";
 import { useAuth0 } from "@auth0/auth0-react";
 
 import { Paper, Container, Typography, TextField, Grid, Button, CircularProgress } from "@mui/material";
+import Typewriter from "typewriter-effect";
 
 const Form = (props) => {
     const [customField, setCustomField] = useState([]);
@@ -216,17 +216,44 @@ function Home(props) {
     if (!isFakeLoading) {
         if (isAuthenticated === true) {
             return (
-              <div className="container">
-                {Object.keys(fixedEvents).length === 0 ? (
-                  <Upload setFixedEvents={setFixedEvents} />
-                ) : (
-                  <Form submitHandler={onSubmit}></Form>
-                )}
-              </div>
+                <div className="container">
+                    {Object.keys(fixedEvents).length === 0 ? (
+                        <Upload setFixedEvents={setFixedEvents} />
+                    ) : (
+                        <Form submitHandler={onSubmit}></Form>
+                    )}
+                </div>
             );
-          } else {
-            return <p>Please log in to use the feature!</p>;
-          }
+        } else {
+            return (
+                <div className="container">
+                    <div className="left">
+                        <Typography className="rightt"variant='h2' color='secondary'>
+                            Plan your:
+                        </Typography>
+                    </div>
+
+                    <div className="right">
+                        <Typography className="leftt" variant='h2' color='primary'>
+                            <Typewriter
+                                options={{
+                                    autoStart: true,
+                                    loop: true,
+                                    delay: 0,
+                                    strings: [
+                                        "academic career.",
+                                        "week.",
+                                        "daily life.",
+                                    ]
+                                }}
+                            >
+                            </Typewriter>
+                        </Typography>
+                    </div>
+
+                </div>
+            )
+        }
     } else {
         return (
             <Loading></Loading>

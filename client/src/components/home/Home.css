@@ -32,3 +32,27 @@
   text-align: center;
   margin-bottom: 25px !important;
 }
+
+.typewrite {
+    margin-left: 10vw;
+}
+
+.left{
+    width: 50vw;
+}
+
+.right{
+    width: 50vw
+}
+
+.rightt{
+    margin-right: 10px;
+    width: 17vw;
+    float: right
+}
+
+.leftt{
+    margin-left: 10px;
+    width: 40vw;
+    float: left
+}
