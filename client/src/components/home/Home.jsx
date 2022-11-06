@@ -6,7 +6,6 @@ import { algorithm } from "../../utils/eventSorter";
 import { thisSunday, flattenEvents } from "../../utils/momentOperations";
 
 import "./Home.css";
-import { useAuth0 } from "@auth0/auth0-react";
 
 const Form = (props) => {
   const [customField, setCustomField] = useState([]);
