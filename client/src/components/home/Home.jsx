@@ -167,6 +167,15 @@ function Home(props) {
             console.log(fixedEvents)
             console.log(JSON.stringify(otherEvents));
             var result = algorithm(fixedEvents, otherEvents, thisSunday)
+            if(Number.isInteger(result[0])){
+                if(result[0] > 6){
+                    console.log("meal error")
+                    console.log(result[0]-7)
+                }else{
+                    console.log("scheduling error")
+                    console.log(result[0])
+                }
+            }
             for (const fixedEvent of flattenEvents(fixedEvents)) {
                 result.push({ ...fixedEvent, backgroundColor: "#e24329" });
             }

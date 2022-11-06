@@ -51,7 +51,7 @@ export const algorithm = (fixedEvents, freeEvents, start) => {
       if (hourDifferenceBetweenDates(allPotentials[compliment][allPotentials[compliment].length - 1][1], allPotentials[compliment][allPotentials[compliment].length - 1][0]) < carry) {
         //If not possible, then can't sleep
         console.log("???")
-        return [];
+        return [i];
       } else {
         //Subtract time from night
         allEvents.push({ title: freeEvents[0].name, start: incrementBy(allPotentials[compliment][allPotentials[compliment].length - 1][1], -carry), end: allPotentials[compliment][allPotentials[compliment].length - 1][1], backgroundColor: sleepColor })
@@ -69,6 +69,7 @@ export const algorithm = (fixedEvents, freeEvents, start) => {
       //Breakfast
       console.log("MEALS")
       console.log(freeEvents[1])
+      var missedMeal = 0;
       let j = 0;
       let found = false;
       for (; j < allPotentials[i].length && incrementBy(allPotentials[i][j][0], freeEvents[1].time).hour() <= 11; ++j) {
@@ -81,6 +82,7 @@ export const algorithm = (fixedEvents, freeEvents, start) => {
       }
       if (!found) {
         console.log("breakfast not found");
+        missedMeal ++;
       }
       found = false;
       //Lunch
@@ -106,6 +108,7 @@ export const algorithm = (fixedEvents, freeEvents, start) => {
       }
       if (!found) {
         console.log("lunch not found");
+        missedMeal ++;
       }
       found = false;
       //Dinner
@@ -130,7 +133,11 @@ export const algorithm = (fixedEvents, freeEvents, start) => {
       }
       if (!found) {
         console.log(allEvents);
-        console.log("dinner not found")
+        console.log("dinner not found");
+        missedMeal ++;
+      }
+      if(missedMeal >= 2){
+        return [i+7]
       }
     }
   }
@@ -168,7 +175,7 @@ export const algorithm = (fixedEvents, freeEvents, start) => {
       if (freeEvents[k].time > 0) {
         console.log(freeEvents[k].time)
         console.log("can'tfit")
-        return []
+        return [i]
       }
       freeEvents[k].time = eventTime;
     }
