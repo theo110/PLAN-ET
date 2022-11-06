@@ -6,11 +6,10 @@ import { algorithm } from "../../utils/eventSorter";
 import { thisSunday, flattenEvents } from "../../utils/momentOperations";
 import "./Home.css";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Paper, Container, Typography, TextField, Grid, Button } from "@mui/material";
 
 const Form = (props) => {
-  const [customField, setCustomField] = useState([]);
-  const [custom, setCustom] = useState("");
+    const [customField, setCustomField] = useState([]);
+    const [custom, setCustom] = useState("");
 
   const addEntry = () => {
     const existingTasks = ["sleep", "meal", "study"];
@@ -124,30 +123,37 @@ const Form = (props) => {
 };
 
 function Home(props) {
-  const { eventEntries, setEventEntries } = props;
-  const [fixedEvents, setFixedEvents] = useState([]);
-  const [otherEvents, setOtherEvents] = useState([]);
-  const navigate = useNavigate();
+    const { eventEntries, setEventEntries } = props;
+    const [fixedEvents, setFixedEvents] = useState([]);
+    const [otherEvents, setOtherEvents] = useState([]);
 
-  function sortByPriority(otherEvents) {
-    const result = [...otherEvents].sort(function (a, b) {
-      if (a.priority < b.priority) return -1;
-      if (a.priority > b.priority) return 1;
-      return 0;
-    });
-    return result;
-  }
 
-  useEffect(() => {
-    if (otherEvents.length !== 0) {
-      console.log(fixedEvents);
-      console.log(JSON.stringify(otherEvents));
-      var result = algorithm(fixedEvents, otherEvents, thisSunday);
-      for (const fixedEvent of flattenEvents(fixedEvents)) {
-        result.push(fixedEvent);
-      }
-      setEventEntries(result);
-      navigate("/calendar");
+    function sortByPriority(otherEvents){
+        const result = [...otherEvents].sort(function(a, b) {
+          if (a.priority < b.priority) return -1;
+          if (a.priority > b.priority) return 1;
+          return 0
+        })
+        return result
+    }
+
+    useEffect(() => {        
+        if (otherEvents.length !== 0) {
+            console.log(fixedEvents)
+            console.log(JSON.stringify(otherEvents));
+            var result = algorithm(fixedEvents,otherEvents,thisSunday)
+            for (const fixedEvent of flattenEvents(fixedEvents)) {
+                result.push(fixedEvent);
+            }
+            setEventEntries(result);
+            navigate("/calendar")
+        }
+    }, [otherEvents])
+
+    const testCal = () => {
+        setEventEntries(fixedEvents);
+        console.log(fixedEvents)
+        navigate("/calendar")
     }
   }, [otherEvents]);
 
@@ -185,8 +191,11 @@ function Home(props) {
   };
 
   return (
-    <div className='container'>
-      {Object.keys(fixedEvents).length === 0 ? <Upload setFixedEvents={setFixedEvents} /> : <Form submitHandler={onSubmit}></Form>}
+    <div className="container">
+      <button type='button' onClick={() => testCal()}>
+        Test calendar
+      </button>
+      {(Object.keys(fixedEvents).length === 0) ? <Upload setFixedEvents={setFixedEvents} /> :  <Form submitHandler={onSubmit}></Form>}
     </div>
   );
 }
