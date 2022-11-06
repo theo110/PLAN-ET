@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router";
 import Upload from "../upload/Upload";
+import { algorithm } from "../../utils/eventSorter";
+import { thisSunday } from "../../utils/momentOperations";
+
 import "./Home.css";
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -108,6 +111,14 @@ function Home(props) {
     });
     return result;
   }
+
+  useEffect(() => {
+    if (otherEvents.length !== 0) {
+      console.log(JSON.stringify(otherEvents));
+      var result = algorithm(fixedEvents, otherEvents, thisSunday);
+      console.log(result);
+    }
+  }, [otherEvents]);
 
   useEffect(() => {
     if (otherEvents.length !== 0) {
