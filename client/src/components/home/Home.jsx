@@ -11,8 +11,8 @@ import Loading from "../auth/Loading";
 import { Paper, Container, Typography, TextField, Grid, Button, CircularProgress } from "@mui/material";
 
 const Form = (props) => {
-  const [customField, setCustomField] = useState([]);
-  const [custom, setCustom] = useState("");
+    const [customField, setCustomField] = useState([]);
+    const [custom, setCustom] = useState("");
 
     const addEntry = () => {
         const existingTasks = ["sleep", "meal", "study"];
@@ -125,48 +125,32 @@ const Form = (props) => {
                         </Grid>
                     </Grid>
 
-          <Button type="submit" variant="contained" fullWidth>
-            Submit
-          </Button>
-        </form>
-      </Paper>
-    </Container>
-  );
+                    <Button type="submit" variant="contained" fullWidth>
+                        Submit
+                    </Button>
+                </form>
+            </Paper>
+        </Container>
+    );
 };
 
 function Home(props) {
-  const { eventEntries, setEventEntries } = props;
-  const [fixedEvents, setFixedEvents] = useState([]);
-  const [otherEvents, setOtherEvents] = useState([]);
-  const navigate = useNavigate();
-  const [isFakeLoading, setFakeLoading] = useState(false);
+    const { eventEntries, setEventEntries } = props;
+    const [fixedEvents, setFixedEvents] = useState([]);
+    const [otherEvents, setOtherEvents] = useState([]);
+    const navigate = useNavigate();
+    const [isFakeLoading, setFakeLoading] = useState(false);
 
-  const delay = (time) => {
-    return new Promise((resolve) => setTimeout(resolve, time));
-  };
-  function sortByPriority(otherEvents) {
-    const result = [...otherEvents].sort(function (a, b) {
-      if (a.priority < b.priority) return -1;
-      if (a.priority > b.priority) return 1;
-      return 0;
-    });
-    return result;
-  }
-
-  useEffect(() => {
-    if (otherEvents.length !== 0) {
-      console.log(fixedEvents);
-      console.log(JSON.stringify(otherEvents));
-      var result = algorithm(fixedEvents, otherEvents, thisSunday);
-      for (const fixedEvent of flattenEvents(fixedEvents)) {
-        result.push(fixedEvent);
-      }
-      setEventEntries(result);
-      setFakeLoading(true);
-      delay(3000).then(() => {
-        setFakeLoading(false);
-        navigate("/calendar");
-      });
+    const delay = (time) => {
+        return new Promise((resolve) => setTimeout(resolve, time));
+    };
+    function sortByPriority(otherEvents) {
+        const result = [...otherEvents].sort(function (a, b) {
+            if (a.priority < b.priority) return -1;
+            if (a.priority > b.priority) return 1;
+            return 0;
+        });
+        return result;
     }
     function sortByPriority(otherEvents) {
         const result = [...otherEvents].sort(function (a, b) {
@@ -250,31 +234,6 @@ function Home(props) {
             </div>
         )
     }
-    var sorted = sortByPriority(array);
-    setOtherEvents(sorted);
-    console.log(otherEvents);
-  };
-
-  if (!isFakeLoading) {
-    return (
-      <div className="container">
-        <button type="button" onClick={() => testCal()}>
-          Test calendar
-        </button>
-        {Object.keys(fixedEvents).length === 0 ? (
-          <Upload setFixedEvents={setFixedEvents} />
-        ) : (
-          <Form submitHandler={onSubmit}></Form>
-        )}
-      </div>
-    );
-  } else {
-    return (
-      <div className="container2">
-        <Loading></Loading>
-      </div>
-    );
-  }
 }
 
 export default Home;
