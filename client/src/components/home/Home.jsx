@@ -13,8 +13,13 @@ const Form = (props) => {
   const [custom, setCustom] = useState("");
 
   const addEntry = () => {
-    setCustomField([...customField, custom]);
-    console.log(customField);
+    const existingTasks = ["sleep", "meal", "study"];
+    if (existingTasks.includes(custom)) {
+      alert(`Please enter a task other than ${custom}`);
+    } else {
+      setCustomField([...customField, custom]);
+      console.log(customField);
+    }
   };
 
   const formik = useFormik({
