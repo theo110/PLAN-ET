@@ -5,6 +5,7 @@ import sortEvents from "../../utils/eventSorter";
 import { splitEventsByDay } from "../../utils/momentOperations";
 /*import { useDropzone } from "React-dropzone";
 
+/*
 function Dropzone({ open }) {
   const { getRootProps, getInputProps } = useDropzone({});
   return (
