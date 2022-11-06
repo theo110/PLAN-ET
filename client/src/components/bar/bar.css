@@ -1,0 +1,24 @@
+.navbar {
+  background-color: whitesmoke;
+  display: "flex";
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+}
+
+.title {
+  font-size: 3em;
+  color: orange;
+}
+
+.login-button {
+  background-color: #1cac78;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  margin: 4px 2px;
+  cursor: pointer;
+}

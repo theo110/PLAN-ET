@@ -1,5 +1,6 @@
-import { Typography, Toolbar, AppBar } from "@mui/material";
 import AuthNav from "../auth/auth-nav";
+import AuthenticationButton from "../auth/authentication-button";
+import "./bar.css";
 
 const Bar = () => {
   return (
