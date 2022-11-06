@@ -21,6 +21,10 @@
     background-color:#fca326;
     border-width: 0px;
     font-family: "Roboto";
-    color: green;
-    font-size: 2vh;
+    font-size: 2.2vh;
+}
+
+.fc-highlight
+{
+  background-color:inherit !important;
 }
