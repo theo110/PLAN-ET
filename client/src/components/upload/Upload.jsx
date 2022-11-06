@@ -5,6 +5,7 @@ import { sortEvents } from "../../utils/eventSorter";
 import { splitEventsByDay } from "../../utils/momentOperations";
 import { useDropzone } from "react-dropzone";
 import { GrFormUpload } from "react-icons/gr";
+import "./Upload.css"
 
 const baseStyle = {
   flex: 1,
@@ -19,7 +20,7 @@ const baseStyle = {
   borderColor: "#fca326",
   borderStyle: "dashed",
   backgroundColor: "#fffaf5",
-  color: "#e24329",
+  color: "#554488",
   outline: "none",
   transition: "border .20s ease-in-out",
 };
@@ -81,7 +82,7 @@ function Upload(props) {
           <div className="input-icon">
             <GrFormUpload size={100} />
           </div>
-          <p>Drag 'n' drop the .ics file here, or click to select your .ics file</p>
+          <p>Drag and drop the .ics file here, or click to select your .ics file</p>
         </div>
       </section>
     );
