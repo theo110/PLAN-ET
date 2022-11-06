@@ -4,21 +4,22 @@ import { useNavigate } from "react-router";
 import Upload from "../upload/Upload";
 import Loading from "../loading/Loading";
 import { algorithm } from "../../utils/eventSorter";
-import { thisSunday, flattenEvents } from "../../utils/momentOperations";
+import { thisSunday, flattenEvents, toDayOfWeek } from "../../utils/momentOperations";
 import "./Home.css";
 import { useAuth0 } from "@auth0/auth0-react";
 
-import { Paper, Container, Typography, TextField, Grid, Button, CircularProgress } from "@mui/material";
+import { Paper, Container, Typography, TextField, Grid, Button, Snackbar, Alert } from "@mui/material";
 import Typewriter from "typewriter-effect";
 
 const Form = (props) => {
     const [customField, setCustomField] = useState([]);
     const [custom, setCustom] = useState("");
+    const [existingTaskAlert, setExistingTaskAlert] = useState(false);
 
     const addEntry = () => {
         const existingTasks = ["sleep", "meal", "study"];
         if (existingTasks.includes(custom)) {
-            alert(`Please enter a task other than ${custom}`);
+            setExistingTaskAlert(true);
         } else {
             setCustomField([...customField, custom]);
             console.log(customField);
@@ -34,6 +35,13 @@ const Form = (props) => {
         onSubmit: props.submitHandler,
     });
     return (
+        <>
+        <Snackbar open={existingTaskAlert} autoHideDuration={3000} onClose={() => {setExistingTaskAlert(false)}} anchorOrigin={{ vertical: 'top', horizontal: 'center' }}>
+            <Alert onClose={() => {setExistingTaskAlert(false)}} severity="error" sx={{ width: '100%' }}>
+                {`Please enter a task other than ${custom}`}
+            </Alert>
+        </Snackbar>
+        
         <Container className='form'>
             <Paper className='paper'>
                 <Typography variant='h4' className='formHeader' color='secondary'>
@@ -144,6 +152,7 @@ const Form = (props) => {
                 </form>
             </Paper>
         </Container>
+        </>
     );
 };
 
@@ -153,6 +162,8 @@ function Home(props) {
     const [otherEvents, setOtherEvents] = useState([]);
     const navigate = useNavigate();
     const [isFakeLoading, setFakeLoading] = useState(false);
+    const [scheduleConflictAlert, setScheduleConflictAlert] = useState(false);
+    const [scheduleConflictMsg, setScheduleConflictMsg] = useState('');
 
     const delay = (time) => {
         return new Promise((resolve) => setTimeout(resolve, time));
@@ -184,11 +195,9 @@ function Home(props) {
             if (Number.isInteger(result[0])) {
                 isError = true;
                 if (result[0] > 6) {
-                    console.log("meal error")
-                    console.log(result[0] - 7)
+                    setScheduleConflictMsg(`Meal error on ${toDayOfWeek(result[0] - 7)}`)
                 } else {
-                    console.log("scheduling error")
-                    console.log(result[0])
+                    setScheduleConflictMsg(`Scheduling error on ${toDayOfWeek(result[0])}`)
                 }
             }
             for (const fixedEvent of flattenEvents(fixedEvents)) {
@@ -201,7 +210,7 @@ function Home(props) {
                 if (!isError) {
                     navigate("/calendar")
                 }else{
-
+                    setScheduleConflictAlert(true);
                 }
             })
 
@@ -249,7 +258,14 @@ function Home(props) {
                     {Object.keys(fixedEvents).length === 0 ? (
                         <Upload setFixedEvents={setFixedEvents} />
                     ) : (
-                        <Form submitHandler={onSubmit}></Form>
+                        <>
+                            <Snackbar open={scheduleConflictAlert} autoHideDuration={3000} onClose={() => {setScheduleConflictAlert(false)}} anchorOrigin={{ vertical: 'top', horizontal: 'center' }}>
+                                <Alert onClose={() => {setScheduleConflictAlert(false)}} severity="error" sx={{ width: '100%' }}>
+                                    {scheduleConflictMsg}
+                                </Alert>
+                            </Snackbar>
+                            <Form submitHandler={onSubmit}></Form>
+                        </>
                     )}
                 </div>
             );
