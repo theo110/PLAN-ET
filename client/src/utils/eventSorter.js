@@ -59,6 +59,53 @@ const algorithm = (fixedEvents, freeEvents, start) => {
       allPotentials[i][0][0] + incrementBy(allPotentials[i][0][0],fixedEvents[0].time);
     }
 
+    //Meal Time
+    //Breakfast
+    let j = 0;
+    let found = false;
+    for (; j < allPotentials[i].length && incrementBy(allPotentials[i][j][0], freeEvents[1].time).hour <= 10; ++j) {
+      if (hourDifferenceBetweenDates(allPotentials[i][j][1], allPotentials[i][j][0]) >= freeEvents[1].time) {
+        allEvents[i].push({title: freeEvents[1].name, start: allPotentials[i][j][0], end: incrementBy(allPotentials[i][j][0], freeEvents[1].time)});
+        allPotentials[i][j][0].hours += freeEvents[1].time;
+        found = true;
+        break;
+      }
+    }
+    if (!found) {
+      //throw error
+    }
+    found = false;
+    //Lunch
+    for (; j < allPotentials[i].length && (allPotentials[i][j][0].hour >= 11 || incrementBy(allPotentials[i][j][1], -freeEvents[1].time).hour >= 11) && incrementBy(allPotentials[i][j][0], freeEvents[1].time).hour <= 2; ++j) {
+      if (hourDifferenceBetweenDates(allPotentials[i][j][1], allPotentials[i][j][0]) >= freeEvents[1].time) {
+        if (allPotentials[i][j][0].hours >= 11) {
+          allEvents[i].push({title: freeEvents[1].name, start: allPotentials[i][j][0], end: incrementBy(allPotentials[i][j][0], freeEvents[i].time)});
+          allPotentials[i][j][0].hours += freeEvents[1].time;
+        } else {
+          allEvents[i].push({title: freeEvents[1].name, start: incrementBy(allPotentials[i][j][1], -freeEvents[1].time), end: allPotentials[i][j][1]});
+          allPotentials[i][j][1].hours -= freeEvents[1].time;
+        }
+        found = true;
+        break;
+      }
+    }
+    if (!found) {
+      //throw error
+    }
+    found = false;
+    //Dinner
+    for (; j < allPotentials[i].length && allPotentials[i][j][0].hours >= 5; ++j) {
+      if (hourDifferenceBetweenDates(allPotentials[i][j][1], allPotentials[i][j][0]) >= freeEvents[1].time) {
+        allEvents[i].push({title: freeEvents[1].name, start: allPotentials[i][j][0], end: incrementBy(allPotentials[i][j][0], freeEvents[i].time)});
+        allPotentials[i][j][0].hours += freeEvents[1].time;
+        found = true;
+        break;
+      }
+    }
+    if (!found) {
+      //throw eror
+    }
+
     //Other
     for (var k = 2; k < freeEvents.length; k++) {
       for (var l = 0; i < allPotentials.length; i++) {
