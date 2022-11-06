@@ -47,7 +47,11 @@ const Form = (props) => {
                             </Typography>
                         </Grid>
                         <Grid item xs='4'>
-                            <TextField color='primary' fullWidth id='sleep' name='sleep' type='number' min='0' onChange={formik.handleChange} value={formik.values.sleep} />
+                            <TextField color='primary' fullWidth id='sleep' name='sleep' type='number' InputProps={{
+                                inputProps: {
+                                    max: 24, min: 0
+                                }
+                            }} onChange={formik.handleChange} value={formik.values.sleep} />
                         </Grid>
                         <Grid item xs='2' className='suffix'>
                             <Typography color='secondary.darker'>
@@ -62,7 +66,11 @@ const Form = (props) => {
                             </Typography>
                         </Grid>
                         <Grid item xs='4'>
-                            <TextField fullWidth id='study' name='study' type='number' min='0' onChange={formik.handleChange} value={formik.values.study} />
+                            <TextField fullWidth id='study' name='study' type='number' InputProps={{
+                                inputProps: {
+                                    max: 24, min: 0
+                                }
+                            }} onChange={formik.handleChange} value={formik.values.study} />
                         </Grid>
                         <Grid item xs='2' className='suffix'>
                             <Typography color='secondary.darker'>
@@ -77,11 +85,11 @@ const Form = (props) => {
                             </Typography>
                         </Grid>
                         <Grid item xs='4'>
-                            <TextField fullWidth id='meal' name='meal' type='number' step='any' min='0' onChange={formik.handleChange} value={formik.values.meal} />
+                            <TextField fullWidth id='meal' name='meal' type='number' step='.01'  onChange={formik.handleChange} value={formik.values.meal} />
                         </Grid>
                         <Grid item xs='2' className='suffix'>
                             <Typography color='secondary.darker'>
-                                hrs/day
+                                hrs/meal
                             </Typography>
                         </Grid>
                     </Grid>
@@ -93,7 +101,11 @@ const Form = (props) => {
                                 </Typography>
                             </Grid>
                             <Grid item xs='4'>
-                                <TextField fullWidth id={field} name={field} type='number' min='0' onChange={formik.handleChange} value={formik.values[field]} />
+                                <TextField fullWidth id={field} name={field} type='number' InputProps={{
+                                    inputProps: {
+                                        max: 24, min: 0
+                                    }
+                                }} onChange={formik.handleChange} value={formik.values[field]} />
                             </Grid>
                             <Grid item xs='2' className='suffix'>
                                 <Typography color='secondary.darker'>
@@ -167,11 +179,14 @@ function Home(props) {
             console.log(fixedEvents)
             console.log(JSON.stringify(otherEvents));
             var result = algorithm(fixedEvents, otherEvents, thisSunday)
-            if(Number.isInteger(result[0])){
-                if(result[0] > 6){
+
+            var isError = false;
+            if (Number.isInteger(result[0])) {
+                isError = true;
+                if (result[0] > 6) {
                     console.log("meal error")
-                    console.log(result[0]-7)
-                }else{
+                    console.log(result[0] - 7)
+                } else {
                     console.log("scheduling error")
                     console.log(result[0])
                 }
@@ -181,10 +196,15 @@ function Home(props) {
             }
             setEventEntries(result);
             setFakeLoading(true)
-            delay(3000).then(() => {
+            delay(1000).then(() => {
                 setFakeLoading(false)
-                navigate("/calendar")
+                if (!isError) {
+                    navigate("/calendar")
+                }else{
+
+                }
             })
+
         }
     }, [otherEvents])
 
