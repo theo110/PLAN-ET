@@ -95,7 +95,7 @@ const Form = (props) => {
                                 <TextField fullWidth id={field} name={field} type='number' min='0' onChange={formik.handleChange} value={formik.values[field]} />
                             </Grid>
                             <Grid item xs='2' className='suffix'>
-                                <Typography color='secondary'>
+                                <Typography color='secondary.darker'>
                                     hrs/day
                                 </Typography>
                             </Grid>
