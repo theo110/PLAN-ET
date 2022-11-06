@@ -109,6 +109,7 @@ function Home(props) {
 
     useEffect(() => {        
         if (otherEvents.length !== 0) {
+            console.log(fixedEvents)
             console.log(JSON.stringify(otherEvents));
             var result = algorithm(fixedEvents,otherEvents,thisSunday)
             for (const fixedEvent of flattenEvents(fixedEvents)) {
