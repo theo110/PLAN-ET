@@ -256,22 +256,22 @@ function Home(props) {
                     </div>
                     <div className="alignplus">
                         <div className="align">
-                            <Typography className="fullw" variant='h4' color='secondary.darker'>
-                                PLAN-ET allows you to conviniently plan out weekly schedules hastle free
+                            <Typography className="fullw" variant='h5' color='secondary.darker'>
+                                PLAN-ET allows you to conveniently plan out weekly schedules hassle free
                             </Typography>
                         </div>
                         <div className="align">
-                            <Typography className="fullw" variant='h4' color='primary'>
+                            <Typography className="fullw" variant='h5' color='primary'>
                                 1. Login/Create a free account
                             </Typography>
                         </div>
                         <div className="align">
-                            <Typography className="fullw" variant='h4' color='primary'>
+                            <Typography className="fullw" variant='h5' color='primary'>
                                 2. Upload your class schedule
                             </Typography>
                         </div>
                         <div className="align">
-                            <Typography className="fullw" variant='h4' color='primary'>
+                            <Typography className="fullw" variant='h5' color='primary'>
                                 3. Fill out your weekly plans
                             </Typography>
                         </div>
