@@ -36,9 +36,13 @@
 }
 ::-webkit-scrollbar-track{
     border-radius: 100em;
-    background-color: #ffffff;
+    background-color: white;
 }
 ::-webkit-scrollbar-thumb{
     background: #e24329;
     border-radius: 100em;
+}
+
+.fc-scroller.fc-scroller-liquid-absolute{
+    overflow: hidden !important;
 }
