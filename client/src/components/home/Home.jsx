@@ -110,7 +110,8 @@ function Home(props) {
     useEffect(() => {        
         if (otherEvents.length !== 0) {
             console.log(JSON.stringify(otherEvents));
-            algorithm(fixedEvents,otherEvents,thisSunday)
+            var result = algorithm(fixedEvents,otherEvents,thisSunday)
+            console.log(result)
         }
     }, [otherEvents])
 
@@ -150,7 +151,8 @@ function Home(props) {
             i++;
         }
         var sorted = sortByPriority(array)
-        setOtherEvents([sorted])
+        setOtherEvents(sorted)
+        console.log(otherEvents)
     }
 
     // test calendar
