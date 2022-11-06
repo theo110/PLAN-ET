@@ -94,6 +94,7 @@ function Home(props) {
     const [fixedEvents, setFixedEvents] = useState([]);
     const [otherEvents, setOtherEvents] = useState([]);
 
+
     function sortByPriority(otherEvents){
         const result = [...otherEvents].sort(function(a, b) {
           if (a.priority < b.priority) return -1;
@@ -108,6 +109,12 @@ function Home(props) {
             console.log(JSON.stringify(otherEvents));
         }
     }, [otherEvents])
+
+    const testCal = () => {
+        setEventEntries(fixedEvents);
+        console.log(fixedEvents)
+        navigate("/calendar")
+    }
 
 
     //Aggregate form data
@@ -147,7 +154,7 @@ function Home(props) {
 
   return (
     <div className="container">
-      <button type='button' onClick={() => navigate("/calendar")}>
+      <button type='button' onClick={() => testCal()}>
         Test calendar
       </button>
       {(Object.keys(fixedEvents).length === 0) ? <Upload setFixedEvents={setFixedEvents} /> :  <Form submitHandler={onSubmit}></Form>}
