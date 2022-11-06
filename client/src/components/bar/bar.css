@@ -2,6 +2,7 @@
   background-color: #554488;
   margin-left: auto !important;
   border: none;
+  border-radius: 5px;
   color: white;
   padding: 12px 28px;
   text-align: center;
@@ -17,6 +18,7 @@
   background-color: #fc6d26;
   margin-left: auto !important;
   border: none;
+  border-radius: 5px;
   color: white;
   padding: 12px 28px;
   text-align: center;
