@@ -111,7 +111,8 @@ function Home(props) {
         if (otherEvents.length !== 0) {
             console.log(JSON.stringify(otherEvents));
             var result = algorithm(fixedEvents,otherEvents,thisSunday)
-            console.log(result)
+            setEventEntries(result);
+            navigate("/calendar")
         }
     }, [otherEvents])
 

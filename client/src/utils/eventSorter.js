@@ -34,6 +34,7 @@ export const algorithm = (fixedEvents, freeEvents, start) => {
 
   //Iterate through each day
   var bob = 0;
+  
   for (var i = 0; i < 7; i++) {
     //Sleep Time
     var compliment = (i == 0) ? 6 : i - 1;
@@ -42,11 +43,15 @@ export const algorithm = (fixedEvents, freeEvents, start) => {
       console.log("why")
       //Subtract time from current day
       allEvents.push({ title: freeEvents[0].name, start: allPotentials[i][0][0], end: allPotentials[i][0][1] })
-      fixedEvents[0].time -= hourDifferenceBetweenDates(allPotentials[i][0][1] - allPotentials[i][0][0])
-      allPotentials[i].remove()
+      console.log(allPotentials[i][0][1])
+      console.log(allPotentials[i][0][0])
+
+      var carry = freeEvents[0].time - hourDifferenceBetweenDates(allPotentials[i][0][1], allPotentials[i][0][0])
+      console.log(carry)
+      allPotentials[i].splice(0,1)
 
       //Check time at previous night
-      if (hourDifferenceBetweenDates(allPotentials[compliment][allPotentials[compliment].length - 1][1],allPotentials[compliment][allPotentials[compliment].length - 1][0]) < freeEvents[0].time) {
+      if (hourDifferenceBetweenDates(allPotentials[compliment][allPotentials[compliment].length - 1][1],allPotentials[compliment][allPotentials[compliment].length - 1][0]) < carry) {
         //If not possible, then can't sleep
         console.log("wh2y")
         return [];
@@ -54,12 +59,11 @@ export const algorithm = (fixedEvents, freeEvents, start) => {
         //Subtract time from night
         console.log("wh233232y")
 
-        allEvents.push({ title: freeEvents[0].name, start: incrementBy(allPotentials[compliment][allPotentials[compliment].length - 1][1],-freeEvents[0].time), end: allPotentials[compliment][allPotentials[compliment].length - 1][1] })
-        allPotentials[compliment][allPotentials[compliment].length - 1][1] = incrementBy(allPotentials[compliment][allPotentials[compliment].length - 1][1],freeEvents[0].time);
+        allEvents.push({ title: freeEvents[0].name, start: incrementBy(allPotentials[compliment][allPotentials[compliment].length - 1][1],-carry), end: allPotentials[compliment][allPotentials[compliment].length - 1][1] })
+        allPotentials[compliment][allPotentials[compliment].length - 1][1] = incrementBy(allPotentials[compliment][allPotentials[compliment].length - 1][1],carry);
       }
     } else {
       //Can sleep 12 - x 
-      console.log(freeEvents)
       allEvents.push({ title: freeEvents[0].name, start: allPotentials[i][0][0], end: incrementBy(allPotentials[i][0][0],freeEvents[0].time)})
       allPotentials[i][0][0] = incrementBy(allPotentials[i][0][0],freeEvents[0].time);
     }
@@ -115,6 +119,7 @@ export const algorithm = (fixedEvents, freeEvents, start) => {
 
     //Other
     for (var k = 2; k < freeEvents.length; k++) {
+      var eventTime = freeEvents[k].time
       for (var l = 0; i < allPotentials.length; i++) {
         //Split up event
         if (hourDifferenceBetweenDates(allPotentials[i][l][1],allPotentials[i][l][0])< freeEvents[k].time) {
@@ -122,7 +127,7 @@ export const algorithm = (fixedEvents, freeEvents, start) => {
           //Make sure end - start = allPotenials[i][l][1] - allPotentials[i][l][0]
           allEvents.push({ title: freeEvents[k].name, start: allPotentials[i][l][0], end: allPotentials[i][l][1]})
           freeEvents[k].time -= hourDifferenceBetweenDates(allPotentials[i][l][1],allPotentials[i][l][0]);
-          allPotentials[i].remove(l);
+          allPotentials[i].splice(l,1);
         }
         //Period > time
         else {
@@ -135,7 +140,8 @@ export const algorithm = (fixedEvents, freeEvents, start) => {
 
       }
       if (freeEvents[k].time > 0) return []
+      freeEvents[k] = eventTime;
     }
   }
-  return allEvents;
+  return sortEvents(allEvents);
 }
