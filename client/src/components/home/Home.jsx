@@ -195,9 +195,9 @@ function Home(props) {
             if (Number.isInteger(result[0])) {
                 isError = true;
                 if (result[0] > 6) {
-                    setScheduleConflictMsg(`Meal error on ${toDayOfWeek(result[0] - 7)}`)
+                    setScheduleConflictMsg(`Meal error on ${toDayOfWeek(result[0] - 7)}: You are unable to fit at least two meals on ${toDayOfWeek(result[0] - 7)}.`)
                 } else {
-                    setScheduleConflictMsg(`Scheduling error on ${toDayOfWeek(result[0])}`)
+                    setScheduleConflictMsg(`Scheduling error on ${toDayOfWeek(result[0])}: A schedule cannot be generated based on your specifications for ${toDayOfWeek(result[0])}.`)
                 }
             }
             for (const fixedEvent of flattenEvents(fixedEvents)) {
