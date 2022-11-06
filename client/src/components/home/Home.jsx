@@ -72,7 +72,7 @@ const Form = (props) => {
                     <Grid container className='inputGroup' alignItems='center'>
                         <Grid item xs='5'>
                             <Typography className='label' htmlFor='meal' color='primary'>
-                                How long do spend eating?
+                                How long do you spend eating?
                             </Typography>
                         </Grid>
                         <Grid item xs='4'>
@@ -88,7 +88,7 @@ const Form = (props) => {
                         <Grid container className='inputGroup' alignItems='center'>
                             <Grid item xs='5'>
                                 <Typography className='label' htmlFor='custom' color='primary'>
-                                    How long do spend on {field}?
+                                    How long do you spend on {field}?
                                 </Typography>
                             </Grid>
                             <Grid item xs='4'>
