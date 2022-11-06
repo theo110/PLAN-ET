@@ -4,173 +4,186 @@ import { useNavigate } from "react-router";
 import Upload from "../upload/Upload";
 import { algorithm } from "../../utils/eventSorter";
 import { thisSunday, flattenEvents } from "../../utils/momentOperations";
-
 import "./Home.css";
 import { useAuth0 } from "@auth0/auth0-react";
+import { Paper, Container, Typography, TextField, Grid, Button } from "@mui/material";
 
 const Form = (props) => {
-    const [customField, setCustomField] = useState([]);
-    const [custom, setCustom] = useState("");
+  const [customField, setCustomField] = useState([]);
+  const [custom, setCustom] = useState("");
 
-    const addEntry = () => {
-        setCustomField([...customField, custom])
-        console.log(customField)
-    }
+  const addEntry = () => {
+    setCustomField([...customField, custom]);
+    console.log(customField);
+  };
 
-    const formik = useFormik({
-        initialValues: {
-            sleep: 0,
-            study: 0,
-            meal: 0,
-        },
-        onSubmit: props.submitHandler,
-    });
-    return (
-        <div>
-            <form onSubmit={formik.handleSubmit} id="form">
-                <label htmlFor="sleep">How long do you sleep?
-                    <input
-                        id="sleep"
-                        name="sleep"
-                        type="number"
-                        min="0"
-                        onChange={formik.handleChange}
-                        value={formik.values.sleep}
-                    />
-                    <span>hrs/day</span>
-                </label>
-                <label htmlFor="study">How long do you study?
-                    <input
-                        id="study"
-                        name="study"
-                        type="number"
-                        min="0"
-                        onChange={formik.handleChange}
-                        value={formik.values.study}
-                    />
-                    <span>hrs/day</span>
-                </label>
-                <label htmlFor="meal">How long do typically spend eating?
-                    <input
-                        id="meal"
-                        name="meal"
-                        type="number"
-                        min="0"
-                        onChange={formik.handleChange}
-                        value={formik.values.meal}
-                    />
-                    <span>hrs/meal</span>
-                </label>
-                {customField.map((field) => (
-                    <label htmlFor="custom">How long do typically spend {field}?
-                        <input
-                            id={field}
-                            name={field}
-                            type="number"
-                            min="0"
-                            onChange={formik.handleChange}
-                            value={formik.values[field]}
-                        />
-                        <span>hrs/day</span>
-                    </label>
-                ))}
+  const formik = useFormik({
+    initialValues: {
+      sleep: 0,
+      study: 0,
+    },
+    onSubmit: props.submitHandler,
+  });
+  return (
+    <Container className='form'>
+      <Paper className='paper'>
+        <Typography variant='h4' className='formHeader'>
+          Enter your weekly plans
+        </Typography>
+        <form onSubmit={formik.handleSubmit} id='form'>
+          <Grid container className='inputGroup' alignItems='center'>
+            <Grid item xs='5' className='label'>
+              <Typography htmlFor='sleep' justifyContent='center'>
+                How long do you sleep?
+              </Typography>
+            </Grid>
+            <Grid item xs='4'>
+              <TextField fullWidth id='sleep' name='sleep' type='number' min='0' onChange={formik.handleChange} value={formik.values.sleep} />
+            </Grid>
+            <Grid item xs='2' className='suffix'>
+              hrs/day
+            </Grid>
+          </Grid>
+          <Grid container className='inputGroup' alignItems='center'>
+            <Grid item xs='5'>
+              <Typography className='label' htmlFor='study'>
+                How long do you study?
+              </Typography>
+            </Grid>
+            <Grid item xs='4'>
+              <TextField fullWidth id='study' name='study' type='number' min='0' onChange={formik.handleChange} value={formik.values.study} />
+            </Grid>
+            <Grid item xs='2' className='suffix'>
+              hrs/day
+            </Grid>
+          </Grid>
+          <Grid container className='inputGroup' alignItems='center'>
+            <Grid item xs='5'>
+              <Typography className='label' htmlFor='meal'>
+                How long do typically spend eating?
+              </Typography>
+            </Grid>
+            <Grid item xs='4'>
+              <TextField fullWidth id='meal' name='meal' type='number' step='any' min='0' onChange={formik.handleChange} value={formik.values.meal} />
+            </Grid>
+            <Grid item xs='2' className='suffix'>
+              hrs/meal
+            </Grid>
+          </Grid>
+          {customField.map((field) => (
+            <Grid container className='inputGroup' alignItems='center'>
+              <Grid item xs='5'>
+                <Typography className='label' htmlFor='custom'>
+                  How long do typically spend {field}?
+                </Typography>
+              </Grid>
+              <Grid item xs='4'>
+                <TextField fullWidth id={field} name={field} type='number' min='0' onChange={formik.handleChange} value={formik.values[field]} />
+              </Grid>
+              <Grid item xs='2' className='suffix'>
+                hrs/day
+              </Grid>
+            </Grid>
+          ))}
+          <Grid container className='inputGroup' alignItems='center'>
+            <Grid item xs='4'>
+              <Typography className='label' htmlFor='custom'>
+                Add your own custom event:
+              </Typography>
+            </Grid>
+            <Grid item xs='5'>
+              <TextField
+                fullWidth
+                id='custom'
+                name='custom'
+                type='string'
+                onChange={(e) => {
+                  setCustom(e.target.value);
+                }}
+              />
+            </Grid>
+            <Grid item xs='2'>
+              <Button onClick={addEntry} variant='contained' className='suffix'>
+                Add field
+              </Button>
+            </Grid>
+          </Grid>
 
-                <button type="submit">Submit</button>
-            </form>
-            <div>
-                <label htmlFor="custom">Add your own custom event:
-                    <input
-                        id="custom"
-                        name="custom"
-                        type="string"
-                        onChange={e => { setCustom(e.target.value) }}
-                    />
-                </label>
-                <button onClick={addEntry}>Add field</button>
-            </div>
-        </div>
-    )
-}
+          <Button type='submit' variant='contained' fullWidth>
+            Submit
+          </Button>
+        </form>
+      </Paper>
+    </Container>
+  );
+};
 
 function Home(props) {
-    const { eventEntries, setEventEntries } = props;
-    const [fixedEvents, setFixedEvents] = useState([]);
-    const [otherEvents, setOtherEvents] = useState([]);
+  const { eventEntries, setEventEntries } = props;
+  const [fixedEvents, setFixedEvents] = useState([]);
+  const [otherEvents, setOtherEvents] = useState([]);
+  const navigate = useNavigate();
 
+  function sortByPriority(otherEvents) {
+    const result = [...otherEvents].sort(function (a, b) {
+      if (a.priority < b.priority) return -1;
+      if (a.priority > b.priority) return 1;
+      return 0;
+    });
+    return result;
+  }
 
-    function sortByPriority(otherEvents) {
-        const result = [...otherEvents].sort(function (a, b) {
-            if (a.priority < b.priority) return -1;
-            if (a.priority > b.priority) return 1;
-            return 0
-        })
-        return result
+  useEffect(() => {
+    if (otherEvents.length !== 0) {
+      console.log(fixedEvents);
+      console.log(JSON.stringify(otherEvents));
+      var result = algorithm(fixedEvents, otherEvents, thisSunday);
+      for (const fixedEvent of flattenEvents(fixedEvents)) {
+        result.push(fixedEvent);
+      }
+      setEventEntries(result);
+      navigate("/calendar");
     }
+  }, [otherEvents]);
 
-    useEffect(() => {
-        if (otherEvents.length !== 0) {
-            console.log(fixedEvents)
-            console.log(JSON.stringify(otherEvents));
-            var result = algorithm(fixedEvents, otherEvents, thisSunday)
-            for (const fixedEvent of flattenEvents(fixedEvents)) {
-                result.push(fixedEvent);
-            }
-            setEventEntries(result);
-            navigate("/calendar")
-        }
-    }, [otherEvents])
+  //Aggregate form data
+  const onSubmit = (values) => {
+    const keys = Object.keys(values);
+    var i = 0;
+    var array = [];
 
-    const testCal = () => {
-        setEventEntries(fixedEvents);
-        console.log(fixedEvents)
-        navigate("/calendar")
+    var currPriority = 3;
+    while (i < keys.length) {
+      var priority;
+      var key = keys[i];
+      switch (key) {
+        case "sleep":
+          priority = 0;
+          break;
+        case "meal":
+          priority = 1;
+          break;
+        case "study":
+          priority = 2;
+          break;
+        default:
+          priority = currPriority;
+          currPriority += 1;
+      }
+      var curr = { name: key, time: values[key], priority: priority };
+      array.push(curr);
+      i++;
     }
+    var sorted = sortByPriority(array);
+    setOtherEvents(sorted);
+    console.log(otherEvents);
+  };
 
-
-    //Aggregate form data
-    const onSubmit = (values) => {
-        const keys = Object.keys(values)
-        var i = 0
-        var array = []
-
-        var currPriority = 3;
-        while (i < keys.length) {
-            var priority;
-            var key = keys[i]
-            switch (key) {
-                case 'sleep':
-                    priority = 0;
-                    break;
-                case 'meal':
-                    priority = 1;
-                    break;
-                case 'study':
-                    priority = 2;
-                    break;
-                default:
-                    priority = currPriority;
-                    currPriority += 1;
-            }
-            var curr = { name: key, time: values[key], priority: priority }
-            array.push(curr);
-            i++;
-        }
-        var sorted = sortByPriority(array)
-        setOtherEvents(sorted)
-        console.log(otherEvents)
-    }
-
-    // test calendar
-    const navigate = useNavigate();
-
-    return (
-        <div className="container">
-            <button type='button' onClick={() => testCal()}>
-                Test calendar
-            </button>
-            {(Object.keys(fixedEvents).length === 0) ? <Upload setFixedEvents={setFixedEvents} /> : <Form submitHandler={onSubmit}></Form>}
-        </div>
-    );
+  return (
+    <div className='container'>
+      {Object.keys(fixedEvents).length === 0 ? <Upload setFixedEvents={setFixedEvents} /> : <Form submitHandler={onSubmit}></Form>}
+    </div>
+  );
 }
 
 export default Home;
