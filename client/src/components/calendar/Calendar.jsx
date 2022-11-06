@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import "./Calendar.css";
@@ -22,7 +22,7 @@ const Calendar = (props) => {
         dayHeaderFormat={{ weekday: "long" }}
         allDaySlot={false}
         plugins={[timeGridPlugin]}
-        initialView='timeGridWeek'
+        initialView="timeGridWeek"
         events={dateEventEntries}
       />
     </div>
