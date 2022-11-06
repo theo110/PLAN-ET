@@ -24,3 +24,8 @@
 .fc-highlight {
   background-color: inherit !important;
 }
+
+.fc-today,
+.fc-day-today {
+  background-color: inherit !important;
+}
