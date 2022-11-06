@@ -96,7 +96,7 @@ export const algorithm = (fixedEvents, freeEvents, start) => {
             found = true;
             break;
           } else if (incrementBy(allPotentials[i][j][1], -freeEvents[1].time).hour() >= 11) {
-            let startTime = incrementBy(allPotentials[i][j][1], -incrementBy(allPotentials[i][j][1], -11).hour());
+            let startTime = allPotentials[i][j][1].clone().hour(11).minute(0);
             allEvents.push({ title: "lunch", start: startTime, end: incrementBy(startTime, freeEvents[1].time) });
             let endTime = allPotentials[i][j][1];
             allPotentials[i][j][1] = startTime;
@@ -121,7 +121,7 @@ export const algorithm = (fixedEvents, freeEvents, start) => {
             found = true;
             break;
           } else if (incrementBy(allPotentials[i][j][1], -freeEvents[1].time).hour() >= 17) {
-            let startTime = incrementBy(allPotentials[i][j][1], -incrementBy(allPotentials[i][j][1], -17).hour());
+            let startTime = allPotentials[i][j][1].clone().hour(17).minute(0);
             allEvents.push({title: "dinner", start: startTime, end: incrementBy(startTime, freeEvents[1].time)});
             let endTime = allPotentials[i][j][1];
             allPotentials[i][j][1] = startTime;
