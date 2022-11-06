@@ -158,7 +158,7 @@ const Form = (props) => {
 };
 
 function Home(props) {
-    const { eventEntries, setEventEntries } = props;
+    const {setEventEntries} = props;
     const [fixedEvents, setFixedEvents] = useState([]);
     const [otherEvents, setOtherEvents] = useState([]);
     const navigate = useNavigate();
@@ -176,14 +176,6 @@ function Home(props) {
             return 0;
         });
         return result;
-    }
-    function sortByPriority(otherEvents) {
-        const result = [...otherEvents].sort(function (a, b) {
-            if (a.priority < b.priority) return -1;
-            if (a.priority > b.priority) return 1;
-            return 0
-        })
-        return result
     }
 
     useEffect(() => {
@@ -216,7 +208,7 @@ function Home(props) {
             })
 
         }
-    }, [otherEvents])
+    }, [otherEvents,fixedEvents,navigate,setEventEntries])
 
 
     //Aggregate form data
