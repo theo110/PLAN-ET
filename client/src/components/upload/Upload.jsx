@@ -13,17 +13,18 @@ const baseStyle = {
   alignItems: "center",
   padding: "20px",
   margin: "20px 25vw 20px 25vw",
+  height: "25vh",
   borderWidth: 2,
   borderRadius: 2,
-  borderColor: "#eeeeee",
+  borderColor: "#fca326",
   borderStyle: "dashed",
-  backgroundColor: "#fafafa",
-  color: "#bdbdbd",
+  backgroundColor: "#fffaf5",
+  color: "#e24329",
   outline: "none",
-  transition: "border .24s ease-in-out",
+  transition: "border .20s ease-in-out",
 };
 const focusedStyle = {
-  borderColor: "#2196f3",
+  borderColor: "#e24329",
 };
 const acceptStyle = {
   borderColor: "#00e676",
