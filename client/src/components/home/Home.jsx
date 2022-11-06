@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import { useNavigate } from "react-router";
 import Upload from "../upload/Upload";
 import { algorithm } from "../../utils/eventSorter";
-import { thisSunday } from "../../utils/momentOperations";
+import { thisSunday, flattenEvents } from "../../utils/momentOperations";
 
 import "./Home.css";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -111,6 +111,9 @@ function Home(props) {
         if (otherEvents.length !== 0) {
             console.log(JSON.stringify(otherEvents));
             var result = algorithm(fixedEvents,otherEvents,thisSunday)
+            for (const fixedEvent of flattenEvents(fixedEvents)) {
+                result.push(fixedEvent);
+            }
             setEventEntries(result);
             navigate("/calendar")
         }

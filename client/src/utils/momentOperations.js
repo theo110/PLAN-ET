@@ -26,7 +26,7 @@ export const flattenEvents = (weekOfEvents) => {
   for (const day of weekOfEvents) {
     for (const e of day) {
       if (e) {
-        result.push(transposeToThisWeek(e));
+        result.push(e);
       }
     }
   }
