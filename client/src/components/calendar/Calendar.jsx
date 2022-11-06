@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from "@fullcalendar/timegrid";
+import "./Calendar.css"
 
 const Calendar = (props) => {
   const { eventEntries } = props;
@@ -14,7 +15,7 @@ const Calendar = (props) => {
   });
   return (
     <div>
-      <FullCalendar plugins={[timeGridPlugin]} initialView='timeGridWeek' events={dateEventEntries} />
+      <FullCalendar slotLabelFormat={{hour: 'numeric'}} dayHeaderFormat={{ weekday: 'long' }} allDaySlot={false} plugins={[timeGridPlugin]} initialView='timeGridWeek' events={dateEventEntries} />
     </div>
   );
 };

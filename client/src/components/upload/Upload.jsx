@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useCallback, useMemo } from "react";
 import moment from "moment";
 import icsToJson from "ics-to-json";
-import {sortEvents} from "../../utils/eventSorter";
+import { sortEvents } from "../../utils/eventSorter";
 import { splitEventsByDay } from "../../utils/momentOperations";
 import { useDropzone } from "react-dropzone";
+import { GrFormUpload } from "react-icons/gr";
 
 const baseStyle = {
   flex: 1,
@@ -11,6 +12,7 @@ const baseStyle = {
   flexDirection: "column",
   alignItems: "center",
   padding: "20px",
+  margin: "20px 25vw 20px 25vw",
   borderWidth: 2,
   borderRadius: 2,
   borderColor: "#eeeeee",
@@ -53,7 +55,7 @@ function Upload(props) {
       } else {
         const reader = new FileReader();
         reader.onload = (readerEvent) => {
-          const result = icsToJson(readerEvent.target.result);  
+          const result = icsToJson(readerEvent.target.result);
           setParsedCalendarEvents(splitEventsByDay(sortEvents(jsonToCalendar(result))));
         };
         reader.readAsText(acceptedFiles[0]);
@@ -75,6 +77,9 @@ function Upload(props) {
       <section className='container'>
         <div {...getRootProps({ style })}>
           <input {...getInputProps()} />
+          <div className="input-icon">
+            <GrFormUpload size={100} />
+          </div>
           <p>Drag 'n' drop the .ics file here, or click to select your .ics file</p>
         </div>
       </section>
