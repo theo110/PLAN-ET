@@ -9,8 +9,8 @@ import "./Home.css";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const Form = (props) => {
-  const [customField, setCustomField] = useState([]);
-  const [custom, setCustom] = useState("");
+    const [customField, setCustomField] = useState([]);
+    const [custom, setCustom] = useState("");
 
     const addEntry = () => {
         setCustomField([...customField, custom])
@@ -21,7 +21,7 @@ const Form = (props) => {
         initialValues: {
             sleep: 0,
             study: 0,
-
+            meal: 0,
         },
         onSubmit: props.submitHandler,
     });
@@ -98,19 +98,19 @@ function Home(props) {
     const [otherEvents, setOtherEvents] = useState([]);
 
 
-    function sortByPriority(otherEvents){
-        const result = [...otherEvents].sort(function(a, b) {
-          if (a.priority < b.priority) return -1;
-          if (a.priority > b.priority) return 1;
-          return 0
+    function sortByPriority(otherEvents) {
+        const result = [...otherEvents].sort(function (a, b) {
+            if (a.priority < b.priority) return -1;
+            if (a.priority > b.priority) return 1;
+            return 0
         })
         return result
     }
 
-    useEffect(() => {        
+    useEffect(() => {
         if (otherEvents.length !== 0) {
             console.log(JSON.stringify(otherEvents));
-            var result = algorithm(fixedEvents,otherEvents,thisSunday)
+            var result = algorithm(fixedEvents, otherEvents, thisSunday)
             for (const fixedEvent of flattenEvents(fixedEvents)) {
                 result.push(fixedEvent);
             }
@@ -162,14 +162,14 @@ function Home(props) {
     // test calendar
     const navigate = useNavigate();
 
-  return (
-    <div className="container">
-      <button type='button' onClick={() => testCal()}>
-        Test calendar
-      </button>
-      {(Object.keys(fixedEvents).length === 0) ? <Upload setFixedEvents={setFixedEvents} /> :  <Form submitHandler={onSubmit}></Form>}
-    </div>
-  );
+    return (
+        <div className="container">
+            <button type='button' onClick={() => testCal()}>
+                Test calendar
+            </button>
+            {(Object.keys(fixedEvents).length === 0) ? <Upload setFixedEvents={setFixedEvents} /> : <Form submitHandler={onSubmit}></Form>}
+        </div>
+    );
 }
 
 export default Home;
