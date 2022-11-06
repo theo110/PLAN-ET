@@ -15,7 +15,7 @@ const baseStyle = {
   margin: "20px 25vw 20px 25vw",
   height: "25vh",
   borderWidth: 2,
-  borderRadius: 2,
+  borderRadius: 10,
   borderColor: "#fca326",
   borderStyle: "dashed",
   backgroundColor: "#fffaf5",
